@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pronume_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.pronume.PronumeFragment">
+
+    <TextView
+        android:id="@+id/pronumeRomana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="PronumeRomana"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pronumeEngleza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Pronume Engleza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pronumeRomana" />
+    <TextView
+        android:id="@+id/verificarePronuntie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#ff0000"
+        app:layout_constraintTop_toBottomOf="@id/pronumeEngleza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/textToSpeechButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press To Listen"
+        app:layout_constraintBottom_toBottomOf="@id/pronumeEngleza"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pronumeEngleza"
+        app:layout_constraintTop_toTopOf="@id/pronumeEngleza" />
+
+    <Button
+        android:id="@+id/speechToTextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Press To Speak"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/textToSpeechButton"
+        app:layout_constraintTop_toBottomOf="@id/pronumeEngleza" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avanseaza"
+        app:layout_constraintTop_toBottomOf="@id/speechToTextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
+        android:id="@+id/avanseaza"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
