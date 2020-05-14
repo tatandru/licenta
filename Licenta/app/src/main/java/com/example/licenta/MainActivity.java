@@ -10,19 +10,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
 import android.widget.Toast;
 
 import com.example.licenta.ui.pronume.PronumeFragment;
+import com.example.licenta.ui.pronume.ttestFragmentt;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.firestore.DocumentReference;
+
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -44,15 +43,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_menu);
         initUI();
-        db=FirebaseFirestore.getInstance();
-
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PronumeFragment()).commit();
-            drawerMenu.setCheckedItem(R.id.pronume);
-        }
+        db = FirebaseFirestore.getInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ttestFragmentt()).commit();
+        getPronume();
         setMenuListener();
+
     }
-    private void initUI(){
+
+    private void initUI() {
         drawerLayout = findViewById(R.id.drawer_layout);
         drawerMenu = findViewById(R.id.nv_drawer_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -64,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setMenuListener() {
-        getPronume();
+
         drawerMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
