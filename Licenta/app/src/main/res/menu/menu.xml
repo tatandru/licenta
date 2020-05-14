@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/menu_homepage">
+        <item
+            android:id="@+id/pronume"
+            android:title="Pronume" />
+    </group>
+    <group android:id="@+id/menu_favorites">
+        <item
+            android:id="@+id/substantive"
+            android:title="Substantive" />
+    </group>
+    <group android:id="@+id/menu_calendar">
+        <item
+            android:id="@+id/adjective"
+            android:title="Adjective" />
+    </group>
+    <group android:id="@+id/menu_settings">
+        <item
+            android:id="@+id/obiecte"
+            android:title="Obiecte" />
+    </group>
+    <group android:id="@+id/menu_feedback">
+
+    </group>
+
+
+</menu>
