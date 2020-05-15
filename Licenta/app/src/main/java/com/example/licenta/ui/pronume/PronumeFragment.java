@@ -1,5 +1,6 @@
 package com.example.licenta.ui.pronume;
 
+import androidx.core.view.GravityCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -62,13 +63,13 @@ public class PronumeFragment extends Fragment {
         verificare = view.findViewById(R.id.verificarePronuntie);
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
-        avanseaza=view.findViewById(R.id.avanseaza);
+        avanseaza = view.findViewById(R.id.avanseaza);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleRo");
             Bundle bundleEn = getArguments().getBundle("bundleEn");
-            pronumeRomanaArray= bundleRo.getStringArrayList("pronumeRomana");
-            pronumeEnglezaArray= bundleEn.getStringArrayList("pronumeEngleza");
+            pronumeRomanaArray = bundleRo.getStringArrayList("pronumeRomana");
+            pronumeEnglezaArray = bundleEn.getStringArrayList("pronumeEngleza");
 
 
         } catch (Exception e) {
@@ -83,13 +84,10 @@ public class PronumeFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        while(i<pronumeEnglezaArray.size()){
-            pronumeEngleza.setText(pronumeEnglezaArray.get(i));
-            pronumeRomana.setText(pronumeRomanaArray.get(i));
-        }
-        if(i>pronumeEnglezaArray.size()){
-            Toast.makeText(getContext(),"Felicitari",Toast.LENGTH_SHORT).show();
-        }
+        pronumeEngleza.setText(pronumeEnglezaArray.get(i));
+        pronumeRomana.setText(pronumeRomanaArray.get(i));
+        avanseazaButton();
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -101,18 +99,9 @@ public class PronumeFragment extends Fragment {
                     verificare.setText(text.get(0));
                     if (text.get(0).equals(pronumeEngleza.getText())) {
                         verificare.setTextColor(Color.GREEN);
-                        avanseaza.setVisibility(View.VISIBLE);
-                        avanseaza.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                i++;
-                                avanseaza.setVisibility(View.INVISIBLE);
-                            }
-                        });
-                    }
-                    else{
+                    } else {
                         verificare.setTextColor(Color.RED);
-                        Toast.makeText(getContext(),"Incearca din nou",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Incearca din nou", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -183,6 +172,38 @@ public class PronumeFragment extends Fragment {
                 }
             }
         }, "com.google.android.tts");
+    }
+
+    private void avanseazaButton() {
+        avanseaza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (verificare.getCurrentTextColor() == Color.GREEN) {
+                    i++;
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    pronumeEngleza.setText(pronumeEnglezaArray.get(i));
+                    pronumeRomana.setText(pronumeRomanaArray.get(i));
+                } else {
+                    Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
+                }
+                if (i > pronumeEnglezaArray.size()) {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (i > 0) {
+            --i;
+        } else{
+            getChildFragmentManager().popBackStack();
+
+        }
     }
 
 
