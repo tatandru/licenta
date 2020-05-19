@@ -1,4 +1,4 @@
-package com.example.licenta.ui.pronume;
+package com.example.licenta.ui.fragmente;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -5,46 +5,47 @@
     android:id="@+id/pronume_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pronume.PronumeFragment">
+    tools:context=".ui.fragmente.PronumeFragment">
 
     <TextView
-        android:id="@+id/pronumeRomana"
+        android:id="@+id/cuvantRomana"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:text="PronumeRomana"
+        android:text="Cuvant in Romana"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/pronumeEngleza"
+        android:id="@+id/cuvantEngleza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
-        android:text="Pronume Engleza"
+        android:text="Cuvant in Engleza"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pronumeRomana" />
+        app:layout_constraintTop_toBottomOf="@id/cuvantRomana" />
+
     <TextView
         android:id="@+id/verificarePronuntie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="#000000"
-        app:layout_constraintTop_toBottomOf="@id/pronumeEngleza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cuvantEngleza" />
 
     <Button
         android:id="@+id/textToSpeechButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Press To Listen"
-        app:layout_constraintBottom_toBottomOf="@id/pronumeEngleza"
+        app:layout_constraintBottom_toBottomOf="@id/cuvantEngleza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/pronumeEngleza"
-        app:layout_constraintTop_toTopOf="@id/pronumeEngleza" />
+        app:layout_constraintStart_toEndOf="@id/cuvantEngleza"
+        app:layout_constraintTop_toTopOf="@id/cuvantEngleza" />
 
     <Button
         android:id="@+id/speechToTextButton"
@@ -54,14 +55,15 @@
         android:text="Press To Speak"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/textToSpeechButton"
-        app:layout_constraintTop_toBottomOf="@id/pronumeEngleza" />
+        app:layout_constraintTop_toBottomOf="@id/cuvantEngleza" />
+
     <Button
+        android:id="@+id/avanseaza"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Avanseaza"
-        app:layout_constraintTop_toBottomOf="@id/speechToTextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/avanseaza"/>
+        app:layout_constraintTop_toBottomOf="@id/speechToTextButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

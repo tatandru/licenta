@@ -1,8 +1,4 @@
-package com.example.licenta.ui.pronume;
-
-import androidx.core.view.GravityCompat;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
+package com.example.licenta.ui.fragmente;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
@@ -24,14 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.licenta.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
+import java.util.function.UnaryOperator;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -40,7 +33,6 @@ public class PronumeFragment extends Fragment {
     private TextView pronumeRomana;
     private TextView pronumeEngleza;
     private TextView verificare;
-    private FirebaseFirestore db;
     private Button TTS;
     private Button STT;
     private TextToSpeech textToSpeech;
@@ -57,17 +49,17 @@ public class PronumeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.pronume_fragment, container, false);
-        pronumeRomana = view.findViewById(R.id.pronumeRomana);
-        pronumeEngleza = view.findViewById(R.id.pronumeEngleza);
+        View view = inflater.inflate(R.layout.fragment_general, container, false);
+        pronumeRomana = view.findViewById(R.id.cuvantRomana);
+        pronumeEngleza = view.findViewById(R.id.cuvantEngleza);
         verificare = view.findViewById(R.id.verificarePronuntie);
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
 
         try {
-            Bundle bundleRo = getArguments().getBundle("bundleRo");
-            Bundle bundleEn = getArguments().getBundle("bundleEn");
+            Bundle bundleRo = getArguments().getBundle("bundlePronumeRo");
+            Bundle bundleEn = getArguments().getBundle("bundlePronumeEn");
             pronumeRomanaArray = bundleRo.getStringArrayList("pronumeRomana");
             pronumeEnglezaArray = bundleEn.getStringArrayList("pronumeEngleza");
 
@@ -96,8 +88,15 @@ public class PronumeFragment extends Fragment {
             case 10: {
                 if (resultCode == RESULT_OK && null != data) {
                     java.util.ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    verificare.setText(text.get(0));
+                    text.replaceAll(new UnaryOperator<String>() {
+                        @Override
+                        public String apply(String e) {
+                            return e.toLowerCase();
+                        }
+                    });
+
                     if (text.get(0).equals(pronumeEngleza.getText())) {
+                        verificare.setText(text.get(0));
                         verificare.setTextColor(Color.GREEN);
                     } else {
                         verificare.setTextColor(Color.RED);
@@ -193,17 +192,6 @@ public class PronumeFragment extends Fragment {
             }
         });
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        if (i > 0) {
-            --i;
-        } else{
-            getChildFragmentManager().popBackStack();
-
-        }
     }
 
 

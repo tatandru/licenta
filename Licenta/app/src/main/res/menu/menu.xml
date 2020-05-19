@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group android:id="@+id/menu_homepage">
+    <group android:id="@+id/menu_pronume">
         <item
             android:id="@+id/pronume"
             android:title="Pronume" />
     </group>
-    <group android:id="@+id/menu_favorites">
-        <item
-            android:id="@+id/substantive"
-            android:title="Substantive" />
-    </group>
-    <group android:id="@+id/menu_calendar">
+
+    <group android:id="@+id/menu_adjective">
         <item
             android:id="@+id/adjective"
             android:title="Adjective" />
     </group>
-    <group android:id="@+id/menu_settings">
+    <group android:id="@+id/menu_obiecte">
         <item
             android:id="@+id/obiecte"
             android:title="Obiecte" />
     </group>
-    <group android:id="@+id/menu_feedback">
-
+    <group android:id="@+id/menu_zileSaptamana">
+        <item
+            android:id="@+id/zileSaptamana"
+            android:title="Zilele Saptamanii" />
+    </group>
+    <group android:id="@+id/menu_legume">
+        <item
+            android:id="@+id/legume"
+            android:title="Legume" />
+    </group>
+    <group android:id="@+id/menu_fructe">
+        <item
+            android:id="@+id/fructe"
+            android:title="Fructe" />
+    </group>
+    <group android:id="@+id/menu_animale">
+        <item
+            android:id="@+id/animale"
+            android:title="Animale" />
     </group>
 
 
