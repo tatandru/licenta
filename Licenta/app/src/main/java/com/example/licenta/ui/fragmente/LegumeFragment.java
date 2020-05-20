@@ -85,8 +85,8 @@ public class LegumeFragment extends Fragment {
                         }
                     });
 
-                    if (text.get(0).equals(legumeEngleza.getText())) {
-                        verificare.setText(text.get(0));
+                    if (text.contains(legumeEngleza.getText())) {
+                        verificare.setText(legumeEngleza.getText());
                         verificare.setTextColor(Color.GREEN);
                     } else {
                         verificare.setTextColor(Color.RED);

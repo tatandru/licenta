@@ -85,8 +85,8 @@ public class ObiecteFragment extends Fragment {
                         }
                     });
 
-                    if (text.get(0).equals(obiectEngleza.getText())) {
-                        verificare.setText(text.get(0));
+                    if (text.contains(obiectEngleza.getText())) {
+                        verificare.setText(obiectEngleza.getText());
                         verificare.setTextColor(Color.GREEN);
                     } else {
                         verificare.setTextColor(Color.RED);

@@ -84,8 +84,8 @@ public class AdjectiveFragment extends Fragment {
                             return e.toLowerCase();
                         }
                     });
-                    if (text.get(0).equals(adjectiveEngleza.getText())) {
-                        verificare.setText(text.get(0));
+                    if (text.contains(adjectiveEngleza.getText())) {
+                        verificare.setText(adjectiveEngleza.getText());
                         verificare.setTextColor(Color.GREEN);
                     } else {
                         verificare.setTextColor(Color.RED);

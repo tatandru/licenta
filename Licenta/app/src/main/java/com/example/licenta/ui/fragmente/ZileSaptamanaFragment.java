@@ -84,8 +84,8 @@ public class ZileSaptamanaFragment extends Fragment {
                             return e.toLowerCase();
                         }
                     });
-                    if (text.get(0).equals(zileEngleza.getText())) {
-                        verificare.setText(text.get(0));
+                    if (text.contains(zileEngleza.getText())) {
+                        verificare.setText(zileEngleza.getText());
                         verificare.setTextColor(Color.GREEN);
                     } else {
                         verificare.setTextColor(Color.RED);

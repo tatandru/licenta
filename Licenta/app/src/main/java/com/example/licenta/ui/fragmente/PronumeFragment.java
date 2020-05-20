@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +41,10 @@ public class PronumeFragment extends Fragment {
     private ArrayList<String> pronumeRomanaArray;
     private ArrayList<String> pronumeEnglezaArray;
     private Button avanseaza;
-    private int i;
+    private double i;
+    private ProgressBar progressBar;
+    private double progress;
+    private Handler handler = new Handler();
 
     public static PronumeFragment newInstance() {
         return new PronumeFragment();
@@ -56,6 +61,7 @@ public class PronumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        progressBar = view.findViewById(R.id.progressBar);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundlePronumeRo");
@@ -76,8 +82,10 @@ public class PronumeFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        pronumeEngleza.setText(pronumeEnglezaArray.get(i));
-        pronumeRomana.setText(pronumeRomanaArray.get(i));
+        progressBar.setProgress(0);
+        progressBar.setMax((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 10);
+        pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
+        pronumeRomana.setText(pronumeRomanaArray.get((int) i));
         avanseazaButton();
 
     }
@@ -95,10 +103,11 @@ public class PronumeFragment extends Fragment {
                         }
                     });
 
-                    if (text.get(0).equals(pronumeEngleza.getText())) {
-                        verificare.setText(text.get(0));
+                    if (text.contains(pronumeEngleza.getText())) {
+                        verificare.setText(pronumeEngleza.getText());
                         verificare.setTextColor(Color.GREEN);
                     } else {
+                        verificare.setText(text.get(0));
                         verificare.setTextColor(Color.RED);
                         Toast.makeText(getContext(), "Incearca din nou", Toast.LENGTH_SHORT).show();
                     }
@@ -179,16 +188,40 @@ public class PronumeFragment extends Fragment {
             public void onClick(View view) {
                 if (verificare.getCurrentTextColor() == Color.GREEN) {
                     i++;
+
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
-                    pronumeEngleza.setText(pronumeEnglezaArray.get(i));
-                    pronumeRomana.setText(pronumeRomanaArray.get(i));
+                    if (i >= pronumeEnglezaArray.size()) {
+                        progressBar.setProgress((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 10);
+                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    } else {
+                        pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
+                        pronumeRomana.setText(pronumeRomanaArray.get((int) i));
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress = (i / pronumeEnglezaArray.size());
+                                Log.d("myTag", Double.toString(progress));
+                                try {
+                                    Thread.sleep(20);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress((int) (progress * 10));
+                                    }
+                                });
+                            }
+
+                        }).start();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
-                if (i > pronumeEnglezaArray.size()) {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 
