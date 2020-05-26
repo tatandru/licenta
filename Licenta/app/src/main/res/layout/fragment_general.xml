@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/cuvantRomana" />
 
     <TextView
-        android:id="@+id/verificarePronuntie"
+        android:id="@+id/verificarePronuntieLectii"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@id/cuvantEngleza" />
 
     <Button
-        android:id="@+id/avanseaza"
+        android:id="@+id/avanseazaLectii"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Avanseaza"

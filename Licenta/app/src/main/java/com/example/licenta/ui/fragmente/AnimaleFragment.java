@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +39,10 @@ public class AnimaleFragment extends Fragment {
     private ArrayList<String> animaleRomanaArray;
     private ArrayList<String> animaleEnglezaArray;
     private Button avanseaza;
-    private int i;
+    private double i;
+    private ProgressBar progressBar;
+    private double progress;
+    private Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class AnimaleFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        progressBar=view.findViewById(R.id.progressBar);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleAnimaleRo");
@@ -67,8 +73,10 @@ public class AnimaleFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        animaleEngleza.setText(animaleEnglezaArray.get(i));
-        animaleRomana.setText(animaleRomanaArray.get(i));
+        progressBar.setProgress(0);
+        progressBar.setMax((animaleEnglezaArray.size() / animaleEnglezaArray.size()) * 100);
+        animaleEngleza.setText(animaleEnglezaArray.get((int)i));
+        animaleRomana.setText(animaleRomanaArray.get((int)i));
         avanseazaButton();
 
     }
@@ -170,16 +178,40 @@ public class AnimaleFragment extends Fragment {
             public void onClick(View view) {
                 if (verificare.getCurrentTextColor() == Color.GREEN) {
                     i++;
+
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
-                    animaleEngleza.setText(animaleEnglezaArray.get(i));
-                    animaleRomana.setText(animaleRomanaArray.get(i));
+                    if (i >= animaleEnglezaArray.size()) {
+                        progressBar.setProgress((animaleEnglezaArray.size() / animaleEnglezaArray.size()) * 100);
+                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    } else {
+                        animaleEngleza.setText(animaleEnglezaArray.get((int) i));
+                        animaleRomana.setText(animaleRomanaArray.get((int) i));
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress = (i / animaleEnglezaArray.size());
+                                Log.d("myTag", Double.toString(progress));
+                                try {
+                                    Thread.sleep(20);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress((int) (progress * 100));
+                                    }
+                                });
+                            }
+
+                        }).start();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
-                if (i > animaleRomanaArray.size()) {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

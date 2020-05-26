@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +38,10 @@ public class LegumeFragment extends Fragment {
     private ArrayList<String> legumeRomanaArray;
     private ArrayList<String> legumeEnglezaArray;
     private Button avanseaza;
-    private int i;
+    private double i;
+    private ProgressBar progressBar;
+    private double progress;
+    private Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class LegumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        progressBar = view.findViewById(R.id.progressBar);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleLegumeRo");
@@ -66,8 +72,10 @@ public class LegumeFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        legumeEngleza.setText(legumeEnglezaArray.get(i));
-        legumeRomana.setText(legumeRomanaArray.get(i));
+        progressBar.setProgress(0);
+        progressBar.setMax((legumeEnglezaArray.size() / legumeEnglezaArray.size()) * 100);
+        legumeEngleza.setText(legumeEnglezaArray.get((int) i));
+        legumeRomana.setText(legumeRomanaArray.get((int) i));
         avanseazaButton();
 
     }
@@ -169,16 +177,40 @@ public class LegumeFragment extends Fragment {
             public void onClick(View view) {
                 if (verificare.getCurrentTextColor() == Color.GREEN) {
                     i++;
+
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
-                    legumeEngleza.setText(legumeEnglezaArray.get(i));
-                    legumeRomana.setText(legumeRomanaArray.get(i));
+                    if (i >= legumeEnglezaArray.size()) {
+                        progressBar.setProgress((legumeEnglezaArray.size() / legumeEnglezaArray.size()) * 100);
+                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    } else {
+                        legumeEngleza.setText(legumeEnglezaArray.get((int) i));
+                        legumeRomana.setText(legumeRomanaArray.get((int) i));
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                progress = (i / legumeEnglezaArray.size());
+                                Log.d("myTag", Double.toString(progress));
+                                try {
+                                    Thread.sleep(20);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+                                handler.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        progressBar.setProgress((int) (progress * 100));
+                                    }
+                                });
+                            }
+
+                        }).start();
+                    }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
-                if (i > legumeRomanaArray.size()) {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
 

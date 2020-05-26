@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView drawerMenu;
+    final Bundle bundleIntrebariLocRo = new Bundle();
+    final Bundle bundleIntrebariLocEn = new Bundle();
+    final Bundle bundleRaspunsuriLocEn = new Bundle();
+    final Bundle bundleRaspunsuriLocRo = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -405,6 +409,57 @@ public class MainActivity extends AppCompatActivity {
                 animaleRo.addAll(animale);
                 Log.d("myTag", animale.toString());
                 bundleAnimaleRo.putStringArrayList("animaleRomana", animaleRo);
+
+            }
+        });
+    }
+
+    public void getQALocatie() {
+        db.collection("cuvinte").document("intrebariLocatieRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebareLocatieRomana = task.getResult();
+                List<String> intrebari = (List<String>) intrebareLocatieRomana.get("intrebari");
+                ArrayList<String> intrebariLocatieRo = new ArrayList<>(intrebari.size());
+                intrebariLocatieRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariLocRo.putStringArrayList("intrebariLocatieRo", intrebariLocatieRo);
+
+            }
+        });
+        db.collection("cuvinte").document("intrebariLocatieEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebareLocatieEngleza = task.getResult();
+                List<String> intrebari = (List<String>) intrebareLocatieEngleza.get("intrebari");
+                ArrayList<String> intrebariLocatieEn = new ArrayList<>(intrebari.size());
+                intrebariLocatieEn.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariLocEn.putStringArrayList("intrebariLocatieEn", intrebariLocatieEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriLocatieEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsLocatieEngleza = task.getResult();
+                List<String> intrebari = (List<String>) raspunsLocatieEngleza.get("raspunsuri");
+                ArrayList<String> raspunsuriLocatieEn = new ArrayList<>(intrebari.size());
+                raspunsuriLocatieEn.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleRaspunsuriLocEn.putStringArrayList("raspunsuriLocatieEn", raspunsuriLocatieEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriLocatieRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsLocatieRomana = task.getResult();
+                List<String> intrebari = (List<String>) raspunsLocatieRomana.get("raspunsuri");
+                ArrayList<String> raspunsuriLocatieRo = new ArrayList<>(intrebari.size());
+                raspunsuriLocatieRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleRaspunsuriLocRo.putStringArrayList("raspunsuriLocatieRo", raspunsuriLocatieRo);
 
             }
         });

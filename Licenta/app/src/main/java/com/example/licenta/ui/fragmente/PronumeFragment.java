@@ -83,7 +83,7 @@ public class PronumeFragment extends Fragment {
         textToSpeechButton();
         initTextToSpeech();
         progressBar.setProgress(0);
-        progressBar.setMax((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 10);
+        progressBar.setMax((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 100);
         pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
         pronumeRomana.setText(pronumeRomanaArray.get((int) i));
         avanseazaButton();
@@ -192,7 +192,7 @@ public class PronumeFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= pronumeEnglezaArray.size()) {
-                        progressBar.setProgress((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 10);
+                        progressBar.setProgress((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 100);
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
@@ -211,7 +211,7 @@ public class PronumeFragment extends Fragment {
                                 handler.post(new Runnable() {
                                     @Override
                                     public void run() {
-                                        progressBar.setProgress((int) (progress * 10));
+                                        progressBar.setProgress((int) (progress * 100));
                                     }
                                 });
                             }

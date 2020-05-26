@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/intrebareRomanaLectii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Intrebare Romana"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/intrebareEnglezaLectii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:layout_marginTop="136dp"
+        android:text="Intrebare Engleza"
+        app:layout_constraintEnd_toStartOf="@id/textToSpeechButtonLectii1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii1"
+        app:layout_constraintTop_toBottomOf="@id/intrebareRomanaLectii" />
+
+    <TextView
+        android:id="@+id/raspunsRomanaLectii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Raspuns Romana"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verificarePronuntieLectii1" />
+
+    <TextView
+        android:id="@+id/raspunsEnglezaLectii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Raspuns Engleza"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii2"
+        app:layout_constraintEnd_toStartOf="@id/textToSpeechButtonLectii2"
+        app:layout_constraintTop_toBottomOf="@id/raspunsRomanaLectii"
+
+        />
+
+    <TextView
+        android:id="@+id/verificarePronuntieLectii1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sdfsadf"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@id/raspunsRomanaLectii"
+        app:layout_constraintEnd_toStartOf="@id/speechToTextButtonLectii1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/intrebareEnglezaLectii" />
+
+    <TextView
+        android:id="@+id/verificarePronuntieLectii2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asdfasdfasdf"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toStartOf="@id/speechToTextButtonLectii2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/raspunsEnglezaLectii"
+        app:layout_constraintBottom_toBottomOf="@id/speechToTextButtonLectii2"/>
+
+    <Button
+        android:id="@+id/textToSpeechButtonLectii1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press To Listen"
+        app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/intrebareEnglezaLectii"
+        app:layout_constraintTop_toBottomOf="@id/intrebareRomanaLectii" />
+
+    <Button
+        android:id="@+id/textToSpeechButtonLectii2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press To Listen"
+        app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/raspunsEnglezaLectii"
+        app:layout_constraintTop_toBottomOf="@id/raspunsRomanaLectii" />
+
+    <Button
+        android:id="@+id/speechToTextButtonLectii1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Press To Speak"
+        app:layout_constraintTop_toBottomOf="@id/intrebareEnglezaLectii"
+        app:layout_constraintStart_toEndOf="@id/verificarePronuntieLectii1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/raspunsRomanaLectii"/>
+
+    <Button
+        android:id="@+id/speechToTextButtonLectii2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        android:text="Press To Speak"
+        app:layout_constraintBottom_toTopOf="@+id/raspunsRomanaLectii"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toEndOf="@id/verificarePronuntieLectii1"
+        app:layout_constraintTop_toBottomOf="@id/raspunsEnglezaLectii"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/avanseazaLectii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avanseaza"
+        app:layout_constraintTop_toBottomOf="@id/speechToTextButtonLectii2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/progressBarLectii"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="0"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
