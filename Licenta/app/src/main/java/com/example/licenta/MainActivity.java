@@ -19,9 +19,12 @@ import android.widget.Toast;
 import com.example.licenta.ui.fragmente.AdjectiveFragment;
 import com.example.licenta.ui.fragmente.AnimaleFragment;
 import com.example.licenta.ui.fragmente.FructeFragment;
+import com.example.licenta.ui.fragmente.InterumaneFragment;
 import com.example.licenta.ui.fragmente.LegumeFragment;
+import com.example.licenta.ui.fragmente.LocatieFragment;
 import com.example.licenta.ui.fragmente.ObiecteFragment;
 import com.example.licenta.ui.fragmente.PronumeFragment;
+import com.example.licenta.ui.fragmente.TemporalFragment;
 import com.example.licenta.ui.fragmente.ZileSaptamanaFragment;
 import com.example.licenta.ui.fragmente.ttestFragmentt;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
     final Bundle bundleIntrebariLocEn = new Bundle();
     final Bundle bundleRaspunsuriLocEn = new Bundle();
     final Bundle bundleRaspunsuriLocRo = new Bundle();
+    final Bundle bundleIntrebariUmaneRo = new Bundle();
+    final Bundle bundleIntrebariTempRo = new Bundle();
+    final Bundle bundleIntrebariTempEn = new Bundle();
+    final Bundle bundleRaspunsuriTempEn = new Bundle();
+    final Bundle bundleRaspunsuriTempRo = new Bundle();
+    final Bundle bundleIntrebariUmaneEn = new Bundle();
+    final Bundle bundleRaspunsuriUmaneEn = new Bundle();
+    final Bundle bundleRaspunsuriUmaneRo = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +213,57 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         break;
+                    case R.id.locatie:
+                        try {
+                            LocatieFragment locatieFragment = new LocatieFragment();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle("bundleIntrebariLocEn", bundleIntrebariLocEn);
+                            bundle.putBundle("bundleIntrebariLocRo", bundleIntrebariLocRo);
+                            bundle.putBundle("bundleRaspunsuriLocEn", bundleRaspunsuriLocEn);
+                            bundle.putBundle("bundleRaspunsuriLocRo", bundleRaspunsuriLocRo);
+                            locatieFragment.setArguments(bundle);
+                            transaction.replace(R.id.fragment_container, locatieFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case R.id.temporal:
+                        try {
+                            TemporalFragment temporalFragment = new TemporalFragment();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle("bundleIntrebariTempEn", bundleIntrebariTempEn);
+                            bundle.putBundle("bundleIntrebariTempRo", bundleIntrebariTempRo);
+                            bundle.putBundle("bundleRaspunsuriTempEn", bundleRaspunsuriTempEn);
+                            bundle.putBundle("bundleRaspunsuriTempRo", bundleRaspunsuriTempRo);
+                            temporalFragment.setArguments(bundle);
+                            transaction.replace(R.id.fragment_container, temporalFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case R.id.interumane:
+                        try {
+                            InterumaneFragment interumaneFragment = new InterumaneFragment();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle("bundleIntrebariUmaneEn", bundleIntrebariUmaneEn);
+                            bundle.putBundle("bundleIntrebariUmaneRo", bundleIntrebariUmaneRo);
+                            bundle.putBundle("bundleRaspunsuriUmaneEn", bundleRaspunsuriUmaneEn);
+                            bundle.putBundle("bundleRaspunsuriUmaneRo", bundleRaspunsuriUmaneRo);
+                            interumaneFragment.setArguments(bundle);
+                            transaction.replace(R.id.fragment_container, interumaneFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
 
 
                     default:
@@ -223,6 +285,9 @@ public class MainActivity extends AppCompatActivity {
         getLegume();
         getObiecte();
         getZileSaptamana();
+        getQAInterumane();
+        getQALocatie();
+        getQATemporale();
     }
 
     public void getPronume() {
@@ -443,10 +508,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot raspunsLocatieEngleza = task.getResult();
-                List<String> intrebari = (List<String>) raspunsLocatieEngleza.get("raspunsuri");
-                ArrayList<String> raspunsuriLocatieEn = new ArrayList<>(intrebari.size());
-                raspunsuriLocatieEn.addAll(intrebari);
-                Log.d("myTag", intrebari.toString());
+                List<String> raspunsuri = (List<String>) raspunsLocatieEngleza.get("raspunsuri");
+                ArrayList<String> raspunsuriLocatieEn = new ArrayList<>(raspunsuri.size());
+                raspunsuriLocatieEn.addAll(raspunsuri);
+                Log.d("myTag", raspunsuri.toString());
                 bundleRaspunsuriLocEn.putStringArrayList("raspunsuriLocatieEn", raspunsuriLocatieEn);
 
             }
@@ -455,11 +520,113 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot raspunsLocatieRomana = task.getResult();
-                List<String> intrebari = (List<String>) raspunsLocatieRomana.get("raspunsuri");
-                ArrayList<String> raspunsuriLocatieRo = new ArrayList<>(intrebari.size());
-                raspunsuriLocatieRo.addAll(intrebari);
-                Log.d("myTag", intrebari.toString());
+                List<String> raspunsuri = (List<String>) raspunsLocatieRomana.get("raspunsuri");
+                ArrayList<String> raspunsuriLocatieRo = new ArrayList<>(raspunsuri.size());
+                raspunsuriLocatieRo.addAll(raspunsuri);
+                Log.d("myTag", raspunsuri.toString());
                 bundleRaspunsuriLocRo.putStringArrayList("raspunsuriLocatieRo", raspunsuriLocatieRo);
+
+            }
+        });
+    }
+
+    public void getQATemporale() {
+        db.collection("cuvinte").document("intrebariTemporaleRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebariTemporaleRomana = task.getResult();
+                List<String> intrebari = (List<String>) intrebariTemporaleRomana.get("intrebari");
+                ArrayList<String> intrebariTempRo = new ArrayList<>(intrebari.size());
+                intrebariTempRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariTempRo.putStringArrayList("intrebariTempRo", intrebariTempRo);
+
+            }
+        });
+        db.collection("cuvinte").document("intrebariTemporaleEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebariTemporaleEngleza = task.getResult();
+                List<String> intrebari = (List<String>) intrebariTemporaleEngleza.get("intrebari");
+                ArrayList<String> intrebariTempEn = new ArrayList<>(intrebari.size());
+                intrebariTempEn.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariTempEn.putStringArrayList("intrebariTempEn", intrebariTempEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriTemporaleEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsuriTemporaleEngleza = task.getResult();
+                List<String> raspunsuri = (List<String>) raspunsuriTemporaleEngleza.get("raspunsuri");
+                ArrayList<String> raspunsuriTempEn = new ArrayList<>(raspunsuri.size());
+                raspunsuriTempEn.addAll(raspunsuri);
+                Log.d("myTag", raspunsuri.toString());
+                bundleRaspunsuriTempEn.putStringArrayList("raspunsuriTempEn", raspunsuriTempEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriTemporaleRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsuriTemporaleRomana = task.getResult();
+                List<String> intrebari = (List<String>) raspunsuriTemporaleRomana.get("raspunsuri");
+                ArrayList<String> raspunsuriTempRo = new ArrayList<>(intrebari.size());
+                raspunsuriTempRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleRaspunsuriTempRo.putStringArrayList("raspunsuriTempRo", raspunsuriTempRo);
+
+            }
+        });
+    }
+
+    public void getQAInterumane() {
+        db.collection("cuvinte").document("intrebariInterumaneRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebariInterumaneRomana = task.getResult();
+                List<String> intrebari = (List<String>) intrebariInterumaneRomana.get("intrebari");
+                ArrayList<String> intrebariUmaneRo = new ArrayList<>(intrebari.size());
+                intrebariUmaneRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariUmaneRo.putStringArrayList("intrebariUmaneRo", intrebariUmaneRo);
+
+            }
+        });
+        db.collection("cuvinte").document("intrebariInterumaneEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebariInterumaneEngleza = task.getResult();
+                List<String> intrebari = (List<String>) intrebariInterumaneEngleza.get("intrebari");
+                ArrayList<String> intrebariUmaneEn = new ArrayList<>(intrebari.size());
+                intrebariUmaneEn.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariUmaneEn.putStringArrayList("intrebariTempEn", intrebariUmaneEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriInterumaneEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsuriInterumaneEngleza = task.getResult();
+                List<String> raspunsuri = (List<String>) raspunsuriInterumaneEngleza.get("raspunsuri");
+                ArrayList<String> raspunsuriUmaneEn = new ArrayList<>(raspunsuri.size());
+                raspunsuriUmaneEn.addAll(raspunsuri);
+                Log.d("myTag", raspunsuri.toString());
+                bundleRaspunsuriUmaneEn.putStringArrayList("raspunsuriUmaneEn", raspunsuriUmaneEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriInterumaneRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsuriInterumaneRomana = task.getResult();
+                List<String> intrebari = (List<String>) raspunsuriInterumaneRomana.get("raspunsuri");
+                ArrayList<String> raspunsuriUmaneRo = new ArrayList<>(intrebari.size());
+                raspunsuriUmaneRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleRaspunsuriUmaneRo.putStringArrayList("raspunsuriUmaneRo", raspunsuriUmaneRo);
 
             }
         });

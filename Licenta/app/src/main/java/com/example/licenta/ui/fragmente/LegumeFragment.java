@@ -97,6 +97,7 @@ public class LegumeFragment extends Fragment {
                         verificare.setText(legumeEngleza.getText());
                         verificare.setTextColor(Color.GREEN);
                     } else {
+                        verificare.setText(text.get(0));
                         verificare.setTextColor(Color.RED);
                         Toast.makeText(getContext(), "Incearca din nou", Toast.LENGTH_SHORT).show();
                     }

@@ -37,6 +37,21 @@
             android:id="@+id/animale"
             android:title="Animale" />
     </group>
+    <group android:id="@+id/menu_locatie">
+        <item
+            android:id="@+id/locatie"
+            android:title="QA Locatie" />
+    </group>
+    <group android:id="@+id/menu_Temporale">
+        <item
+            android:id="@+id/temporal"
+            android:title="QA Temporal" />
+    </group>
+    <group android:id="@+id/menu_interumane">
+        <item
+            android:id="@+id/interumane"
+            android:title="QA Interumane" />
+    </group>
 
 
 </menu>

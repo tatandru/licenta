@@ -28,15 +28,22 @@ import java.util.function.UnaryOperator;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AdjectiveFragment extends Fragment {
-    private TextView adjectiveEngleza;
-    private TextView adjectiveRomana;
-    private TextView verificare;
-    private Button TTS;
-    private Button STT;
+public class TemporalFragment extends Fragment {
+    private TextView intrebareEngleza;
+    private TextView intrebabreRomana;
+    private TextView raspunsRomana;
+    private TextView raspunsEngleza;
+    private TextView verificareIntrebare;
+    private TextView verificareRaspuns;
+    private Button TTSIntrebare;
+    private Button STTIntrebare;
+    private Button TTSRaspuns;
+    private Button STTRaspuns;
     private TextToSpeech textToSpeech;
-    private ArrayList<String> ajdectiveRomanaArray;
-    private ArrayList<String> adjectiveEnglezaArray;
+    private ArrayList<String> intrebareRomanaArray;
+    private ArrayList<String> intrebareEnglezaArray;
+    private ArrayList<String> raspunsuriRomanaArray;
+    private ArrayList<String> raspunsuriEnglezaArray;
     private Button avanseaza;
     private double i;
     private ProgressBar progressBar;
@@ -45,20 +52,29 @@ public class AdjectiveFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_general, container, false);
-        adjectiveRomana = view.findViewById(R.id.cuvantRomana);
-        adjectiveEngleza = view.findViewById(R.id.cuvantEngleza);
-        verificare = view.findViewById(R.id.verificarePronuntie);
-        TTS = view.findViewById(R.id.textToSpeechButton);
-        STT = view.findViewById(R.id.speechToTextButton);
-        avanseaza = view.findViewById(R.id.avanseaza);
-        progressBar = view.findViewById(R.id.progressBar);
+        View view = inflater.inflate(R.layout.lectii_fragment, container, false);
+        intrebabreRomana = view.findViewById(R.id.intrebareRomanaLectii);
+        intrebareEngleza = view.findViewById(R.id.intrebareEnglezaLectii);
+        raspunsEngleza = view.findViewById(R.id.raspunsEnglezaLectii);
+        raspunsRomana = view.findViewById(R.id.raspunsRomanaLectii);
+        verificareIntrebare = view.findViewById(R.id.verificarePronuntieLectii1);
+        verificareRaspuns = view.findViewById(R.id.verificarePronuntieLectii2);
+        TTSIntrebare = view.findViewById(R.id.textToSpeechButtonLectii1);
+        STTIntrebare = view.findViewById(R.id.speechToTextButtonLectii1);
+        TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
+        STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
+        avanseaza = view.findViewById(R.id.avanseazaLectii);
+        progressBar = view.findViewById(R.id.progressBarLectii);
 
         try {
-            Bundle bundleRo = getArguments().getBundle("bundleAdjectiveRo");
-            Bundle bundleEn = getArguments().getBundle("bundleAdjectiveEn");
-            ajdectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
-            adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
+            Bundle bundleQEn = getArguments().getBundle("bundleIntrebariTempEn");
+            Bundle bundleQRo = getArguments().getBundle("bundleIntrebariTempRo");
+            Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriTempEn");
+            Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriTempRo");
+            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariTempRo");
+            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariTempEn");
+            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriTempRo");
+            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriTempEn");
 
 
         } catch (Exception e) {
@@ -69,43 +85,60 @@ public class AdjectiveFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        speechToTextButton();
-        textToSpeechButton();
+        speechToTextButton(STTIntrebare);
+        textToSpeechButton(TTSIntrebare, intrebareEngleza);
+        speechToTextButton(STTRaspuns);
+        textToSpeechButton(TTSRaspuns, raspunsEngleza);
         initTextToSpeech();
         progressBar.setProgress(0);
-        progressBar.setMax((adjectiveEnglezaArray.size() / adjectiveEnglezaArray.size()) * 100);
-        adjectiveEngleza.setText(adjectiveEnglezaArray.get((int)i));
-        adjectiveRomana.setText(ajdectiveRomanaArray.get((int)i));
+        progressBar.setMax((intrebareEnglezaArray.size() / intrebareEnglezaArray.size()) * 100);
+        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
+        intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
+        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
+        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
         avanseazaButton();
 
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+        text.replaceAll(new UnaryOperator<String>() {
+            @Override
+            public String apply(String e) {
+                return e.substring(0, 1).toUpperCase() + e.substring(1);
+            }
+        });
         switch (requestCode) {
             case 10: {
-                if (resultCode == RESULT_OK && null != data) {
-                    java.util.ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    text.replaceAll(new UnaryOperator<String>() {
-                        @Override
-                        public String apply(String e) {
-                            return e.toLowerCase();
-                        }
-                    });
-                    if (text.contains(adjectiveEngleza.getText())) {
-                        verificare.setText(adjectiveEngleza.getText());
-                        verificare.setTextColor(Color.GREEN);
+                if (resultCode == RESULT_OK) {
+                    if (text.contains(intrebareEngleza.getText())) {
+                        verificareIntrebare.setText(intrebareEngleza.getText());
+                        verificareIntrebare.setTextColor(Color.GREEN);
                     } else {
-                        verificare.setText(text.get(0));
-                        verificare.setTextColor(Color.RED);
+                        verificareIntrebare.setText(text.get(0));
+                        verificareIntrebare.setTextColor(Color.RED);
                         Toast.makeText(getContext(), "Incearca din nou", Toast.LENGTH_SHORT).show();
                     }
+                }
 
+                break;
+            }
+
+            case 20: {
+                if (text.contains(raspunsEngleza.getText())) {
+                    verificareRaspuns.setText(raspunsEngleza.getText());
+                    verificareRaspuns.setTextColor(Color.GREEN);
+                } else {
+                    verificareRaspuns.setText(text.get(0));
+                    verificareRaspuns.setTextColor(Color.RED);
+                    Toast.makeText(getContext(), "Incearca din nou", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
         }
     }
+
 
     public void onDestroy() {
         super.onDestroy();
@@ -115,15 +148,17 @@ public class AdjectiveFragment extends Fragment {
         }
     }
 
-    private void speechToTextButton() {
+    private void speechToTextButton(Button STT) {
         final Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, Locale.US);
         STT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-
-                    startActivityForResult(intent, 10);
+                    if (STTIntrebare.isPressed())
+                        startActivityForResult(intent, 10);
+                    if (STTRaspuns.isPressed())
+                        startActivityForResult(intent, 20);
                 } catch (ActivityNotFoundException a) {
 
                     Toast.makeText(getContext(), "asdf", Toast.LENGTH_SHORT).show();
@@ -132,11 +167,11 @@ public class AdjectiveFragment extends Fragment {
         });
     }
 
-    private void textToSpeechButton() {
+    private void textToSpeechButton(Button TTS, final TextView textView) {
         TTS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String data = adjectiveEngleza.getText().toString();
+                String data = textView.getText().toString();
                 Log.i("TTS", "button clicked: " + data);
                 int speechStatus = textToSpeech.speak(data, TextToSpeech.QUEUE_FLUSH, null);
 
@@ -175,21 +210,25 @@ public class AdjectiveFragment extends Fragment {
         avanseaza.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (verificare.getCurrentTextColor() == Color.GREEN) {
+                if (verificareIntrebare.getCurrentTextColor() == Color.GREEN && verificareRaspuns.getCurrentTextColor() == Color.GREEN) {
                     i++;
 
-                    verificare.setTextColor(Color.BLACK);
-                    verificare.setText("");
-                    if (i >= adjectiveEnglezaArray.size()) {
-                        progressBar.setProgress((adjectiveEnglezaArray.size() / adjectiveEnglezaArray.size()) * 100);
+                    verificareIntrebare.setTextColor(Color.BLACK);
+                    verificareIntrebare.setText("");
+                    verificareRaspuns.setTextColor(Color.BLACK);
+                    verificareRaspuns.setText("");
+                    if (i >= intrebareEnglezaArray.size()) {
+                        progressBar.setProgress((intrebareEnglezaArray.size() / intrebareEnglezaArray.size()) * 100);
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
-                        adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
-                        adjectiveRomana.setText(ajdectiveRomanaArray.get((int) i));
+                        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
+                        intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
+                        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
+                        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                progress = (i / adjectiveEnglezaArray.size());
+                                progress = (i / intrebareEnglezaArray.size());
                                 Log.d("myTag", Double.toString(progress));
                                 try {
                                     Thread.sleep(20);
