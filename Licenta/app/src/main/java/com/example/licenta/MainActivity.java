@@ -602,7 +602,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> intrebariUmaneEn = new ArrayList<>(intrebari.size());
                 intrebariUmaneEn.addAll(intrebari);
                 Log.d("myTag", intrebari.toString());
-                bundleIntrebariUmaneEn.putStringArrayList("intrebariTempEn", intrebariUmaneEn);
+                bundleIntrebariUmaneEn.putStringArrayList("intrebariUmaneEn", intrebariUmaneEn);
 
             }
         });
