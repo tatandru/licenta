@@ -127,7 +127,7 @@ public class TemporalFragment extends Fragment {
 
             case 20: {
                 if (text.contains(raspunsEngleza.getText())) {
-                    verificareRaspuns.setText(raspunsEngleza.getText());
+                    verificareRaspuns.setText(raspunsEngleza.getText()+"?");
                     verificareRaspuns.setTextColor(Color.GREEN);
                 } else {
                     verificareRaspuns.setText(text.get(0));

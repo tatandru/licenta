@@ -113,7 +113,7 @@ public class LocatieFragment extends Fragment {
             case 10: {
                 if (resultCode == RESULT_OK) {
                     if (text.contains(intrebareEngleza.getText())) {
-                        verificareIntrebare.setText(intrebareEngleza.getText());
+                        verificareIntrebare.setText(intrebareEngleza.getText()+"?s");
                         verificareIntrebare.setTextColor(Color.GREEN);
                     } else {
                         verificareIntrebare.setText(text.get(0));
