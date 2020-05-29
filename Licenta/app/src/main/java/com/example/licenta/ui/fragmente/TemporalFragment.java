@@ -161,7 +161,7 @@ public class TemporalFragment extends Fragment {
                         startActivityForResult(intent, 20);
                 } catch (ActivityNotFoundException a) {
 
-                    Toast.makeText(getContext(), "asdf", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Eroare", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -191,7 +191,6 @@ public class TemporalFragment extends Fragment {
                 if (status == TextToSpeech.SUCCESS) {
                     int ttsLang = textToSpeech.setLanguage(Locale.US);
                     textToSpeech.setSpeechRate(1);
-
                     if (ttsLang == TextToSpeech.LANG_MISSING_DATA
                             || ttsLang == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Log.e("TTS", "The Language is not supported!");
