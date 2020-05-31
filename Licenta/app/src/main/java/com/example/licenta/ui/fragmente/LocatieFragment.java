@@ -70,7 +70,7 @@ public class LocatieFragment extends Fragment {
             Bundle bundleQEn = getArguments().getBundle("bundleIntrebariLocEn");
             Bundle bundleQRo = getArguments().getBundle("bundleIntrebariLocRo");
             Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriLocEn");
-            Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriLocro");
+            Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriLocRo");
             intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariLocatieRo");
             intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariLocatieEn");
             raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriLocatieRo");
@@ -113,7 +113,7 @@ public class LocatieFragment extends Fragment {
             case 10: {
                 if (resultCode == RESULT_OK) {
                     if (text.contains(intrebareEngleza.getText())) {
-                        verificareIntrebare.setText(intrebareEngleza.getText()+"?s");
+                        verificareIntrebare.setText(intrebareEngleza.getText()+"?");
                         verificareIntrebare.setTextColor(Color.GREEN);
                     } else {
                         verificareIntrebare.setText(text.get(0));
@@ -161,7 +161,7 @@ public class LocatieFragment extends Fragment {
                         startActivityForResult(intent, 20);
                 } catch (ActivityNotFoundException a) {
 
-                    Toast.makeText(getContext(), "asdf", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Eroare", Toast.LENGTH_SHORT).show();
                 }
             }
         });

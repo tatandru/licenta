@@ -127,7 +127,7 @@ public class ObiecteFragment extends Fragment {
                     startActivityForResult(intent, 10);
                 } catch (ActivityNotFoundException a) {
 
-                    Toast.makeText(getContext(), "asdf", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Eroare", Toast.LENGTH_SHORT).show();
                 }
             }
         });
