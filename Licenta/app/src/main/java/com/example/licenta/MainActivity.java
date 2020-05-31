@@ -22,6 +22,7 @@ import com.example.licenta.ui.fragmente.FructeFragment;
 import com.example.licenta.ui.fragmente.InterumaneFragment;
 import com.example.licenta.ui.fragmente.LegumeFragment;
 import com.example.licenta.ui.fragmente.LocatieFragment;
+import com.example.licenta.ui.fragmente.NecunoscutFragment;
 import com.example.licenta.ui.fragmente.ObiecteFragment;
 import com.example.licenta.ui.fragmente.PronumeFragment;
 import com.example.licenta.ui.fragmente.TemporalFragment;
@@ -62,14 +63,18 @@ public class MainActivity extends AppCompatActivity {
     final Bundle bundleIntrebariLocEn = new Bundle();
     final Bundle bundleRaspunsuriLocEn = new Bundle();
     final Bundle bundleRaspunsuriLocRo = new Bundle();
-    final Bundle bundleIntrebariUmaneRo = new Bundle();
     final Bundle bundleIntrebariTempRo = new Bundle();
     final Bundle bundleIntrebariTempEn = new Bundle();
     final Bundle bundleRaspunsuriTempEn = new Bundle();
     final Bundle bundleRaspunsuriTempRo = new Bundle();
+    final Bundle bundleIntrebariUmaneRo = new Bundle();
     final Bundle bundleIntrebariUmaneEn = new Bundle();
     final Bundle bundleRaspunsuriUmaneEn = new Bundle();
     final Bundle bundleRaspunsuriUmaneRo = new Bundle();
+    final Bundle bundleIntrebariNecunoscutRo = new Bundle();
+    final Bundle bundleIntrebariNecunoscutEn = new Bundle();
+    final Bundle bundleRaspunsuriNecunoscutEn = new Bundle();
+    final Bundle bundleRaspunsuriNecunoscutRo = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,6 +269,23 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         break;
+                    case R.id.necunoscut:
+                        try {
+                            NecunoscutFragment necunoscutFragment = new NecunoscutFragment();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle("bundleIntrebariNecunoscutEn", bundleIntrebariNecunoscutEn);
+                            bundle.putBundle("bundleIntrebariNecunoscutRo", bundleIntrebariNecunoscutRo);
+                            bundle.putBundle("bundleRaspunsuriNecunoscutEn", bundleRaspunsuriNecunoscutEn);
+                            bundle.putBundle("bundleRaspunsuriNecunoscutRo", bundleRaspunsuriNecunoscutRo);
+                            necunoscutFragment.setArguments(bundle);
+                            transaction.replace(R.id.fragment_container, necunoscutFragment);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
 
 
                     default:
@@ -288,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
         getQAInterumane();
         getQALocatie();
         getQATemporale();
+        getQANecunoscut();
     }
 
     public void getPronume() {
@@ -627,6 +650,56 @@ public class MainActivity extends AppCompatActivity {
                 raspunsuriUmaneRo.addAll(intrebari);
                 Log.d("myTag", intrebari.toString());
                 bundleRaspunsuriUmaneRo.putStringArrayList("raspunsuriUmaneRo", raspunsuriUmaneRo);
+
+            }
+        });
+    }
+    public void getQANecunoscut() {
+        db.collection("cuvinte").document("intrebariNecunoscutRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebariNecunoscutRomana = task.getResult();
+                List<String> intrebari = (List<String>) intrebariNecunoscutRomana.get("intrebari");
+                ArrayList<String> intrebariNecunoscutRo = new ArrayList<>(intrebari.size());
+                intrebariNecunoscutRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariNecunoscutRo.putStringArrayList("intrebariNecunoscutRo", intrebariNecunoscutRo);
+
+            }
+        });
+        db.collection("cuvinte").document("intrebariNecunoscutEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot intrebariNecunoscutEngleza = task.getResult();
+                List<String> intrebari = (List<String>) intrebariNecunoscutEngleza.get("intrebari");
+                ArrayList<String> intrebariNecunoscutEn = new ArrayList<>(intrebari.size());
+                intrebariNecunoscutEn.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleIntrebariNecunoscutEn.putStringArrayList("intrebariNecunoscutEn", intrebariNecunoscutEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriNecunoscutEngleza").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsuriNecunoscutEngleza = task.getResult();
+                List<String> raspunsuri = (List<String>) raspunsuriNecunoscutEngleza.get("raspunsuri");
+                ArrayList<String> raspunsuriNecunoscutEn = new ArrayList<>(raspunsuri.size());
+                raspunsuriNecunoscutEn.addAll(raspunsuri);
+                Log.d("myTag", raspunsuri.toString());
+                bundleRaspunsuriNecunoscutEn.putStringArrayList("raspunsuriNecunoscutEn", raspunsuriNecunoscutEn);
+
+            }
+        });
+        db.collection("cuvinte").document("raspunsuriNecunoscutRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot raspunsuriNecunoscutRomana = task.getResult();
+                List<String> intrebari = (List<String>) raspunsuriNecunoscutRomana.get("raspunsuri");
+                ArrayList<String> raspunsuriNecunoscutRo = new ArrayList<>(intrebari.size());
+                raspunsuriNecunoscutRo.addAll(intrebari);
+                Log.d("myTag", intrebari.toString());
+                bundleRaspunsuriNecunoscutRo.putStringArrayList("raspunsuriNecunoscutRo", raspunsuriNecunoscutRo);
 
             }
         });
