@@ -102,13 +102,16 @@ public class InterumaneFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        text.replaceAll(new UnaryOperator<String>() {
-            @Override
-            public String apply(String e) {
-                return e.substring(0, 1).toUpperCase() + e.substring(1);
-            }
-        });
+        ArrayList<String> text=new ArrayList<>();
+        if(data!=null) {
+            text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            text.replaceAll(new UnaryOperator<String>() {
+                @Override
+                public String apply(String e) {
+                    return e.substring(0, 1).toUpperCase() + e.substring(1);
+                }
+            });
+        }
         switch (requestCode) {
             case 10: {
                 if (resultCode == RESULT_OK) {
