@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    android:id="@+id/cl_optiune_root_item">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/textOptiune"
+        android:text="Cuvant"
+        android:background="@color/colorPrimaryDark"
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/white"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/textOptiune"
+        app:layout_constraintEnd_toEndOf="@id/textOptiune"
+        app:layout_constraintBottom_toBottomOf="@id/textOptiune"
+        android:text="Alege"
+        android:id="@+id/textOptiuneAlege"
+        android:elevation="2dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@android:color/white"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
