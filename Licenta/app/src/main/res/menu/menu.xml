@@ -57,6 +57,11 @@
             android:id="@+id/necunoscut"
             android:title="QA Necunoscut" />
     </group>
+    <group android:id="@+id/menu_test">
+        <item
+            android:id="@+id/test"
+            android:title="Test" />
+    </group>
 
 
 </menu>

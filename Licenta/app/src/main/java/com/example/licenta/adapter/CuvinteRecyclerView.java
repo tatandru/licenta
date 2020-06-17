@@ -21,7 +21,7 @@ public class CuvinteRecyclerView extends RecyclerView.Adapter<CuvinteRecyclerVie
 
 
     public CuvinteRecyclerView(ArrayList<String> cuvant, Context context) {
-        this.cuvinte = new ArrayList<>(2);
+        this.cuvinte = cuvant;
         this.inflater = LayoutInflater.from(context);
     }
 

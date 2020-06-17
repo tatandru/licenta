@@ -21,6 +21,7 @@ import com.example.licenta.ui.fragmente.AnimaleFragment;
 import com.example.licenta.ui.fragmente.FructeFragment;
 import com.example.licenta.ui.fragmente.InterumaneFragment;
 import com.example.licenta.ui.fragmente.LegumeFragment;
+import com.example.licenta.ui.fragmente.ListaTestFragment;
 import com.example.licenta.ui.fragmente.LocatieFragment;
 import com.example.licenta.ui.fragmente.NecunoscutFragment;
 import com.example.licenta.ui.fragmente.ObiecteFragment;
@@ -106,6 +107,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 int id = menuItem.getItemId();
                 switch (id) {
+                    case R.id.test:
+                        try {
+                            ListaTestFragment ttestFragmentt = new ListaTestFragment();
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
+                            ttestFragmentt.setArguments(bundle);
+                            transaction.replace(R.id.fragment_container, ttestFragmentt);
+                            transaction.addToBackStack(null);
+                            transaction.commit();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        break;
                     case R.id.adjective:
                         //Toast.makeText(MainActivity.this, "Adjective", Toast.LENGTH_SHORT).show();
                         try {
@@ -654,6 +669,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     public void getQANecunoscut() {
         db.collection("cuvinte").document("intrebariNecunoscutRomana").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

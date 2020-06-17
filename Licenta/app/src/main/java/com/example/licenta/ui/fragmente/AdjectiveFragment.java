@@ -35,7 +35,7 @@ public class AdjectiveFragment extends Fragment {
     private Button TTS;
     private Button STT;
     private TextToSpeech textToSpeech;
-    private ArrayList<String> ajdectiveRomanaArray;
+    private ArrayList<String> adjectiveRomanaArray;
     private ArrayList<String> adjectiveEnglezaArray;
     private Button avanseaza;
     private double i;
@@ -57,7 +57,7 @@ public class AdjectiveFragment extends Fragment {
         try {
             Bundle bundleRo = getArguments().getBundle("bundleAdjectiveRo");
             Bundle bundleEn = getArguments().getBundle("bundleAdjectiveEn");
-            ajdectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
+            adjectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
             adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
 
 
@@ -75,7 +75,7 @@ public class AdjectiveFragment extends Fragment {
         progressBar.setProgress(0);
         progressBar.setMax((adjectiveEnglezaArray.size() / adjectiveEnglezaArray.size()) * 100);
         adjectiveEngleza.setText(adjectiveEnglezaArray.get((int)i));
-        adjectiveRomana.setText(ajdectiveRomanaArray.get((int)i));
+        adjectiveRomana.setText(adjectiveRomanaArray.get((int)i));
         avanseazaButton();
 
     }
@@ -185,7 +185,7 @@ public class AdjectiveFragment extends Fragment {
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
-                        adjectiveRomana.setText(ajdectiveRomanaArray.get((int) i));
+                        adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
