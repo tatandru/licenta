@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/ttestFragmentt">
+
+    <fragment
+        android:id="@+id/adjectiveFragment"
+        android:name="com.example.licenta.ui.fragmente.AdjectiveFragment"
+        android:label="AdjectiveFragment" >
+        <action
+            android:id="@+id/action_adjectiveFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/animaleFragment"
+        android:name="com.example.licenta.ui.fragmente.AnimaleFragment"
+        android:label="AnimaleFragment" >
+        <action
+            android:id="@+id/action_animaleFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/fructeFragment"
+        android:name="com.example.licenta.ui.fragmente.FructeFragment"
+        android:label="FructeFragment" >
+        <action
+            android:id="@+id/action_fructeFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/interumaneFragment"
+        android:name="com.example.licenta.ui.fragmente.InterumaneFragment"
+        android:label="InterumaneFragment" >
+        <action
+            android:id="@+id/action_interumaneFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/legumeFragment"
+        android:name="com.example.licenta.ui.fragmente.LegumeFragment"
+        android:label="LegumeFragment" >
+        <action
+            android:id="@+id/action_legumeFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaTestFragment"
+        android:name="com.example.licenta.ui.fragmente.ListaTestFragment"
+        android:label="ListaTestFragment" >
+        <action
+            android:id="@+id/action_listaTestFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/locatieFragment"
+        android:name="com.example.licenta.ui.fragmente.LocatieFragment"
+        android:label="LocatieFragment" >
+        <action
+            android:id="@+id/action_locatieFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/necunoscutFragment"
+        android:name="com.example.licenta.ui.fragmente.NecunoscutFragment"
+        android:label="NecunoscutFragment" >
+        <action
+            android:id="@+id/action_necunoscutFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/obiecteFragment"
+        android:name="com.example.licenta.ui.fragmente.ObiecteFragment"
+        android:label="ObiecteFragment" >
+        <action
+            android:id="@+id/action_obiecteFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/temporalFragment"
+        android:name="com.example.licenta.ui.fragmente.TemporalFragment"
+        android:label="TemporalFragment" >
+        <action
+            android:id="@+id/action_temporalFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/zileSaptamanaFragment"
+        android:name="com.example.licenta.ui.fragmente.ZileSaptamanaFragment"
+        android:label="ZileSaptamanaFragment" >
+        <action
+            android:id="@+id/action_zileSaptamanaFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/pronumeFragment"
+        android:name="com.example.licenta.ui.fragmente.PronumeFragment"
+        android:label="fragment_general"
+        tools:layout="@layout/fragment_general" >
+        <action
+            android:id="@+id/action_pronumeFragment_to_ttestFragmentt"
+            app:destination="@id/ttestFragmentt" />
+    </fragment>
+    <fragment
+        android:id="@+id/ttestFragmentt"
+        android:name="com.example.licenta.ui.fragmente.ttestFragmentt"
+        android:label="ttestFragmentt" >
+        <action
+            android:id="@+id/action_ttestFragmentt_to_animaleFragment"
+            app:destination="@id/animaleFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_pronumeFragment"
+            app:destination="@id/pronumeFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_adjectiveFragment"
+            app:destination="@id/adjectiveFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_temporalFragment"
+            app:destination="@id/temporalFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_locatieFragment"
+            app:destination="@id/locatieFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_necunoscutFragment"
+            app:destination="@id/necunoscutFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_obiecteFragment"
+            app:destination="@id/obiecteFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_fructeFragment"
+            app:destination="@id/fructeFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_interumaneFragment"
+            app:destination="@id/interumaneFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_listaTestFragment"
+            app:destination="@id/listaTestFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_zileSaptamanaFragment"
+            app:destination="@id/zileSaptamanaFragment" />
+        <action
+            android:id="@+id/action_ttestFragmentt_to_legumeFragment"
+            app:destination="@id/legumeFragment" />
+    </fragment>
+</navigation>

@@ -8,6 +8,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 
 import android.os.Bundle;
@@ -40,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseFirestore db;
     final Bundle bundlePronumeEn = new Bundle();
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView drawerMenu;
+    private NavController navController;
     final Bundle bundleIntrebariLocRo = new Bundle();
     final Bundle bundleIntrebariLocEn = new Bundle();
     final Bundle bundleRaspunsuriLocEn = new Bundle();
@@ -85,234 +90,191 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ttestFragmentt()).commit();
         getDB();
-        setMenuListener();
 
     }
 
     private void initUI() {
-        drawerLayout = findViewById(R.id.drawer_layout);
-        drawerMenu = findViewById(R.id.nv_drawer_menu);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        drawerMenu = findViewById(R.id.nv_drawer_menu);
+        navController = Navigation.findNavController(this, R.id.fragment_container);
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
+        NavigationUI.setupWithNavController(drawerMenu, navController);
+        drawerMenu.setNavigationItemSelectedListener(this);
+
+
     }
 
-    private void setMenuListener() {
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, drawerLayout);
+    }
 
-        drawerMenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.test:
-                        try {
-                            ListaTestFragment ttestFragmentt = new ListaTestFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
-                            ttestFragmentt.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, ttestFragmentt);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.adjective:
-                        //Toast.makeText(MainActivity.this, "Adjective", Toast.LENGTH_SHORT).show();
-                        try {
-                            AdjectiveFragment adjectiveFragment = new AdjectiveFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
-                            bundle.putBundle("bundleAdjectiveEn", bundleAdjectiveEn);
-                            adjectiveFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, adjectiveFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.animale:
-                        //Toast.makeText(MainActivity.this, "Animale", Toast.LENGTH_SHORT).show();
-                        try {
-                            AnimaleFragment animaleFragment = new AnimaleFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleAnimaleRo", bundleAnimaleRo);
-                            bundle.putBundle("bundleAnimaleEn", bundleAnimaleEn);
-                            animaleFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, animaleFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.obiecte:
-                        //Toast.makeText(MainActivity.this, "Obiecte", Toast.LENGTH_SHORT).show();
-                        try {
-                            ObiecteFragment obiecteFragment = new ObiecteFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleObiecteRo", bundleObiecteRo);
-                            bundle.putBundle("bundleObiecteEn", bundleObiecteEn);
-                            obiecteFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, obiecteFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.pronume:
-                        try {
-                            PronumeFragment pronumeFragment = new PronumeFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundlePronumeEn", bundlePronumeEn);
-                            bundle.putBundle("bundlePronumeRo", bundlePronumeRo);
-                            pronumeFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, pronumeFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.fructe:
-                        //Toast.makeText(MainActivity.this, "Fructe", Toast.LENGTH_SHORT).show();
-                        try {
-                            FructeFragment fructeFragment = new FructeFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleFructeRo", bundleFructeRo);
-                            bundle.putBundle("bundleFructeEn", bundleFructeEn);
-                            fructeFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, fructeFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.zileSaptamana:
-                        //Toast.makeText(MainActivity.this, "zileSaptamana", Toast.LENGTH_SHORT).show();
-                        try {
-                            ZileSaptamanaFragment zileSaptamanaFragment = new ZileSaptamanaFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleZileRo", bundleZileRo);
-                            bundle.putBundle("bundleZileEn", bundleZileEn);
-                            zileSaptamanaFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, zileSaptamanaFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
-                        break;
-                    case R.id.legume:
-                        //Toast.makeText(MainActivity.this, "Legume", Toast.LENGTH_SHORT).show();
-                        try {
-                            LegumeFragment legumeFragment = new LegumeFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleLegumeRo", bundleLegumeRo);
-                            bundle.putBundle("bundleLegumeEn", bundleLegumeEn);
-                            legumeFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, legumeFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.locatie:
-                        try {
-                            LocatieFragment locatieFragment = new LocatieFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleIntrebariLocEn", bundleIntrebariLocEn);
-                            bundle.putBundle("bundleIntrebariLocRo", bundleIntrebariLocRo);
-                            bundle.putBundle("bundleRaspunsuriLocEn", bundleRaspunsuriLocEn);
-                            bundle.putBundle("bundleRaspunsuriLocRo", bundleRaspunsuriLocRo);
-                            locatieFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, locatieFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.temporal:
-                        try {
-                            TemporalFragment temporalFragment = new TemporalFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleIntrebariTempEn", bundleIntrebariTempEn);
-                            bundle.putBundle("bundleIntrebariTempRo", bundleIntrebariTempRo);
-                            bundle.putBundle("bundleRaspunsuriTempEn", bundleRaspunsuriTempEn);
-                            bundle.putBundle("bundleRaspunsuriTempRo", bundleRaspunsuriTempRo);
-                            temporalFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, temporalFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.interumane:
-                        try {
-                            InterumaneFragment interumaneFragment = new InterumaneFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleIntrebariUmaneEn", bundleIntrebariUmaneEn);
-                            bundle.putBundle("bundleIntrebariUmaneRo", bundleIntrebariUmaneRo);
-                            bundle.putBundle("bundleRaspunsuriUmaneEn", bundleRaspunsuriUmaneEn);
-                            bundle.putBundle("bundleRaspunsuriUmaneRo", bundleRaspunsuriUmaneRo);
-                            interumaneFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, interumaneFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    case R.id.necunoscut:
-                        try {
-                            NecunoscutFragment necunoscutFragment = new NecunoscutFragment();
-                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                            Bundle bundle = new Bundle();
-                            bundle.putBundle("bundleIntrebariNecunoscutEn", bundleIntrebariNecunoscutEn);
-                            bundle.putBundle("bundleIntrebariNecunoscutRo", bundleIntrebariNecunoscutRo);
-                            bundle.putBundle("bundleRaspunsuriNecunoscutEn", bundleRaspunsuriNecunoscutEn);
-                            bundle.putBundle("bundleRaspunsuriNecunoscutRo", bundleRaspunsuriNecunoscutRo);
-                            necunoscutFragment.setArguments(bundle);
-                            transaction.replace(R.id.fragment_container, necunoscutFragment);
-                            transaction.addToBackStack(null);
-                            transaction.commit();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        break;
-
-
-                    default:
-                        drawerLayout.closeDrawers();
-                        return true;
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.test:
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaTestFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                drawerLayout.closeDrawers();
+                break;
+            case R.id.adjective:
+                //Toast.makeText(MainActivity.this, "Adjective", Toast.LENGTH_SHORT).show();
+                try {
 
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
+                    bundle.putBundle("bundleAdjectiveEn", bundleAdjectiveEn);
+                    navController.navigate(R.id.action_ttestFragmentt_to_adjectiveFragment,bundle);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.animale:
+                //Toast.makeText(MainActivity.this, "Animale", Toast.LENGTH_SHORT).show();
+                try {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleAnimaleRo", bundleAnimaleRo);
+                    bundle.putBundle("bundleAnimaleEn", bundleAnimaleEn);
+                    navController.navigate(R.id.action_ttestFragmentt_to_animaleFragment,bundle);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.obiecte:
+                //Toast.makeText(MainActivity.this, "Obiecte", Toast.LENGTH_SHORT).show();
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleObiecteRo", bundleObiecteRo);
+                    bundle.putBundle("bundleObiecteEn", bundleObiecteEn);
+                    navController.navigate(R.id.action_ttestFragmentt_to_obiecteFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.pronume:
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundlePronumeEn", bundlePronumeEn);
+                    bundle.putBundle("bundlePronumeRo", bundlePronumeRo);
+                    navController.navigate(R.id.action_ttestFragmentt_to_pronumeFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.fructe:
+                //Toast.makeText(MainActivity.this, "Fructe", Toast.LENGTH_SHORT).show();
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleFructeRo", bundleFructeRo);
+                    bundle.putBundle("bundleFructeEn", bundleFructeEn);
+                    navController.navigate(R.id.action_ttestFragmentt_to_fructeFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.zileSaptamana:
+                //Toast.makeText(MainActivity.this, "zileSaptamana", Toast.LENGTH_SHORT).show();
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleZileRo", bundleZileRo);
+                    bundle.putBundle("bundleZileEn", bundleZileEn);
+                    navController.navigate(R.id.action_ttestFragmentt_to_zileSaptamanaFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            case R.id.legume:
+                //Toast.makeText(MainActivity.this, "Legume", Toast.LENGTH_SHORT).show();
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleLegumeRo", bundleLegumeRo);
+                    bundle.putBundle("bundleLegumeEn", bundleLegumeEn);
+                    navController.navigate(R.id.action_ttestFragmentt_to_legumeFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.locatie:
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleIntrebariLocEn", bundleIntrebariLocEn);
+                    bundle.putBundle("bundleIntrebariLocRo", bundleIntrebariLocRo);
+                    bundle.putBundle("bundleRaspunsuriLocEn", bundleRaspunsuriLocEn);
+                    bundle.putBundle("bundleRaspunsuriLocRo", bundleRaspunsuriLocRo);
+                    navController.navigate(R.id.action_ttestFragmentt_to_locatieFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.temporal:
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleIntrebariTempEn", bundleIntrebariTempEn);
+                    bundle.putBundle("bundleIntrebariTempRo", bundleIntrebariTempRo);
+                    bundle.putBundle("bundleRaspunsuriTempEn", bundleRaspunsuriTempEn);
+                    bundle.putBundle("bundleRaspunsuriTempRo", bundleRaspunsuriTempRo);
+                    navController.navigate(R.id.action_ttestFragmentt_to_temporalFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.interumane:
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleIntrebariUmaneEn", bundleIntrebariUmaneEn);
+                    bundle.putBundle("bundleIntrebariUmaneRo", bundleIntrebariUmaneRo);
+                    bundle.putBundle("bundleRaspunsuriUmaneEn", bundleRaspunsuriUmaneEn);
+                    bundle.putBundle("bundleRaspunsuriUmaneRo", bundleRaspunsuriUmaneRo);
+                    navController.navigate(R.id.action_ttestFragmentt_to_interumaneFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case R.id.necunoscut:
+                try {
+                    Bundle bundle = new Bundle();
+                    bundle.putBundle("bundleIntrebariNecunoscutEn", bundleIntrebariNecunoscutEn);
+                    bundle.putBundle("bundleIntrebariNecunoscutRo", bundleIntrebariNecunoscutRo);
+                    bundle.putBundle("bundleRaspunsuriNecunoscutEn", bundleRaspunsuriNecunoscutEn);
+                    bundle.putBundle("bundleRaspunsuriNecunoscutRo", bundleRaspunsuriNecunoscutRo);
+                    navController.navigate(R.id.action_ttestFragmentt_to_necunoscutFragment,bundle);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+
+
+            default:
+                drawerLayout.closeDrawers();
                 return true;
-            }
-        });
+        }
+        drawerLayout.closeDrawers();
+
+        return true;
     }
+
 
     public void getDB() {
         getPronume();
@@ -721,28 +683,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (toggle.onOptionsItemSelected(item))
-            return true;
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        toggle.syncState();
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            getFragmentManager().popBackStackImmediate();
-            super.onBackPressed();
-        }
-    }
 
 }
