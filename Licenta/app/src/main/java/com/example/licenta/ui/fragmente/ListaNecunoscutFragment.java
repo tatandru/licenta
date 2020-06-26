@@ -40,14 +40,15 @@ public class ListaNecunoscutFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_optiuni);
         navController = Navigation.findNavController(getActivity(), R.id.fragment_container);
         try {
-            bundleQEn = getArguments().getBundle("bundleIntrebariUmaneEn");
-            bundleQRo = getArguments().getBundle("bundleIntrebariUmaneRo");
-            bundleAEn = getArguments().getBundle("bundleRaspunsuriUmaneEn");
-            bundleARo = getArguments().getBundle("bundleRaspunsuriUmaneRo");
-            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariUmaneRo");
-            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariUmaneEn");
-            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriUmaneRo");
-            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriUmaneEn");
+            bundleQEn = getArguments().getBundle("bundleIntrebariNecunoscutEn");
+            bundleQRo = getArguments().getBundle("bundleIntrebariNecunoscutRo");
+            bundleAEn = getArguments().getBundle("bundleRaspunsuriNecunoscutEn");
+            bundleARo = getArguments().getBundle("bundleRaspunsuriNecunoscutRo");
+
+            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariNecunoscutRo");
+            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariNecunoscutEn");
+            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriNecunoscutRo");
+            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriNecunoscutEn");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -40,14 +40,14 @@ public class ListaLocatieFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_optiuni);
         navController = Navigation.findNavController(getActivity(), R.id.fragment_container);
         try {
-            bundleQEn = getArguments().getBundle("bundleIntrebariUmaneEn");
-            bundleQRo = getArguments().getBundle("bundleIntrebariUmaneRo");
-            bundleAEn = getArguments().getBundle("bundleRaspunsuriUmaneEn");
-            bundleARo = getArguments().getBundle("bundleRaspunsuriUmaneRo");
-            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariUmaneRo");
-            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariUmaneEn");
-            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriUmaneRo");
-            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriUmaneEn");
+            bundleQEn = getArguments().getBundle("bundleIntrebariLocEn");
+            bundleQRo = getArguments().getBundle("bundleIntrebariLocRo");
+            bundleAEn = getArguments().getBundle("bundleRaspunsuriLocEn");
+            bundleARo = getArguments().getBundle("bundleRaspunsuriLocRo");
+            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariLocatieRo");
+            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariLocatieEn");
+            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriLocatieRo");
+            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriLocatieEn");
         } catch (Exception e) {
             e.printStackTrace();
         }

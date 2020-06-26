@@ -60,7 +60,7 @@ public class ListaLegumeFragment extends Fragment {
                 bundle.putBundle("bundleLegumeRo", bundleRo);
                 bundle.putBundle("bundleLegumeEn", bundleEn);
                 bundle.putInt("pozitie",pos);
-                navController.navigate(R.id.action_listaFructeFragment_to_fructeFragment,bundle);
+                navController.navigate(R.id.action_listaLegumeFragment_to_legumeFragment,bundle);
             }
         });
         recyclerView.setAdapter(adapter);

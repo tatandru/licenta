@@ -40,14 +40,15 @@ public class ListaTemporalFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_optiuni);
         navController = Navigation.findNavController(getActivity(), R.id.fragment_container);
         try {
-            bundleQEn = getArguments().getBundle("bundleIntrebariUmaneEn");
-            bundleQRo = getArguments().getBundle("bundleIntrebariUmaneRo");
-            bundleAEn = getArguments().getBundle("bundleRaspunsuriUmaneEn");
-            bundleARo = getArguments().getBundle("bundleRaspunsuriUmaneRo");
-            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariUmaneRo");
-            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariUmaneEn");
-            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriUmaneRo");
-            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriUmaneEn");
+            bundleQEn = getArguments().getBundle("bundleIntrebariTempEn");
+            bundleQRo = getArguments().getBundle("bundleIntrebariTempRo");
+            bundleAEn = getArguments().getBundle("bundleRaspunsuriTempEn");
+            bundleARo = getArguments().getBundle("bundleRaspunsuriTempRo");
+
+            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariTempRo");
+            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariTempEn");
+            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriTempRo");
+            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriTempEn");
         } catch (Exception e) {
             e.printStackTrace();
         }

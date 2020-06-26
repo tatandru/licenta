@@ -57,8 +57,8 @@ public class ListaFructeFragment extends Fragment {
             public void onClick(String cuvant,int pos) {
 
                 Bundle bundle = new Bundle();
-                bundle.putBundle("bundleAdjectiveRo", bundleRo);
-                bundle.putBundle("bundleAdjectiveEn", bundleEn);
+                bundle.putBundle("bundleFructeRo", bundleRo);
+                bundle.putBundle("bundleFructeEn", bundleEn);
                 bundle.putInt("pozitie",pos);
                 navController.navigate(R.id.action_listaFructeFragment_to_fructeFragment,bundle);
             }
