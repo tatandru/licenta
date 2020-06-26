@@ -46,9 +46,7 @@ public class InterumaneFragment extends Fragment {
     private ArrayList<String> raspunsuriEnglezaArray;
     private Button avanseaza;
     private double i;
-    private ProgressBar progressBar;
-    private double progress;
-    private Handler handler = new Handler();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -64,7 +62,6 @@ public class InterumaneFragment extends Fragment {
         TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
         STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
         avanseaza = view.findViewById(R.id.avanseazaLectii);
-        progressBar = view.findViewById(R.id.progressBarLectii);
 
         try {
             Bundle bundleQEn = getArguments().getBundle("bundleIntrebariUmaneEn");
@@ -90,8 +87,7 @@ public class InterumaneFragment extends Fragment {
         speechToTextButton(STTRaspuns);
         textToSpeechButton(TTSRaspuns, raspunsEngleza);
         initTextToSpeech();
-        progressBar.setProgress(0);
-        progressBar.setMax((intrebareEnglezaArray.size() / intrebareEnglezaArray.size()) * 100);
+
         intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
         intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
         raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
@@ -221,33 +217,13 @@ public class InterumaneFragment extends Fragment {
                     verificareRaspuns.setTextColor(Color.BLACK);
                     verificareRaspuns.setText("");
                     if (i >= intrebareEnglezaArray.size()) {
-                        progressBar.setProgress((intrebareEnglezaArray.size() / intrebareEnglezaArray.size()) * 100);
+
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
                         intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
                         raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
                         raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress = (i / intrebareEnglezaArray.size());
-                                Log.d("myTag", Double.toString(progress));
-                                try {
-                                    Thread.sleep(20);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setProgress((int) (progress * 100));
-                                    }
-                                });
-                            }
-
-                        }).start();
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();

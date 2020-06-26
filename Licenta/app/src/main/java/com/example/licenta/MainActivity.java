@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 try {
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
+                    bundle.putBundle("bundleAdjectiveEn", bundleAdjectiveEn);
                     navController.navigate(R.id.action_ttestFragmentt_to_listaTestFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();

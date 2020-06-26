@@ -38,10 +38,8 @@ public class AdjectiveFragment extends Fragment {
     private ArrayList<String> adjectiveRomanaArray;
     private ArrayList<String> adjectiveEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
-    private ProgressBar progressBar;
-    private double progress;
-    private Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -52,11 +50,14 @@ public class AdjectiveFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        progressBar = view.findViewById(R.id.progressBar);
+        inapoi=view.findViewById(R.id.inapoi);
+
+
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleAdjectiveRo");
             Bundle bundleEn = getArguments().getBundle("bundleAdjectiveEn");
+            i=getArguments().getInt("pozitie");
             adjectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
             adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
 
@@ -72,8 +73,6 @@ public class AdjectiveFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        progressBar.setProgress(0);
-        progressBar.setMax((adjectiveEnglezaArray.size() / adjectiveEnglezaArray.size()) * 100);
         adjectiveEngleza.setText(adjectiveEnglezaArray.get((int)i));
         adjectiveRomana.setText(adjectiveRomanaArray.get((int)i));
         avanseazaButton();
@@ -181,31 +180,10 @@ public class AdjectiveFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= adjectiveEnglezaArray.size()) {
-                        progressBar.setProgress((adjectiveEnglezaArray.size() / adjectiveEnglezaArray.size()) * 100);
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
                         adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress = (i / adjectiveEnglezaArray.size());
-                                Log.d("myTag", Double.toString(progress));
-                                try {
-                                    Thread.sleep(20);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setProgress((int) (progress * 100));
-                                    }
-                                });
-                            }
-
-                        }).start();
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
@@ -215,4 +193,5 @@ public class AdjectiveFragment extends Fragment {
         });
 
     }
+    private void inapoiButton(){}
 }

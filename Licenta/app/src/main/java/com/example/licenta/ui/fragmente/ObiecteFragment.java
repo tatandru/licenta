@@ -39,9 +39,7 @@ public class ObiecteFragment extends Fragment {
     private ArrayList<String> obiecteEnglezaArray;
     private Button avanseaza;
     private double i;
-    private ProgressBar progressBar;
-    private double progress;
-    private Handler handler = new Handler();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -52,7 +50,7 @@ public class ObiecteFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        progressBar = view.findViewById(R.id.progressBar);
+
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleObiecteRo");
@@ -72,8 +70,6 @@ public class ObiecteFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        progressBar.setProgress(0);
-        progressBar.setMax((obiecteEnglezaArray.size() / obiecteEnglezaArray.size()) * 100);
         obiectEngleza.setText(obiecteEnglezaArray.get((int) i));
         obiectRomana.setText(obiecteRomanaArray.get((int) i));
         avanseazaButton();
@@ -182,31 +178,10 @@ public class ObiecteFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= obiecteEnglezaArray.size()) {
-                        progressBar.setProgress((obiecteEnglezaArray.size() / obiecteEnglezaArray.size()) * 100);
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         obiectEngleza.setText(obiecteEnglezaArray.get((int) i));
                         obiectRomana.setText(obiecteRomanaArray.get((int) i));
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress = (i / obiecteEnglezaArray.size());
-                                Log.d("myTag", Double.toString(progress));
-                                try {
-                                    Thread.sleep(20);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setProgress((int) (progress * 100));
-                                    }
-                                });
-                            }
-
-                        }).start();
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();

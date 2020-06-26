@@ -42,9 +42,7 @@ public class PronumeFragment extends Fragment {
     private ArrayList<String> pronumeEnglezaArray;
     private Button avanseaza;
     private double i;
-    private ProgressBar progressBar;
-    private double progress;
-    private Handler handler = new Handler();
+
 
     public static PronumeFragment newInstance() {
         return new PronumeFragment();
@@ -61,7 +59,7 @@ public class PronumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        progressBar = view.findViewById(R.id.progressBar);
+
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundlePronumeRo");
@@ -82,8 +80,7 @@ public class PronumeFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        progressBar.setProgress(0);
-        progressBar.setMax((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 100);
+
         pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
         pronumeRomana.setText(pronumeRomanaArray.get((int) i));
         avanseazaButton();
@@ -192,31 +189,11 @@ public class PronumeFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= pronumeEnglezaArray.size()) {
-                        progressBar.setProgress((pronumeEnglezaArray.size() / pronumeEnglezaArray.size()) * 100);
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
                         pronumeRomana.setText(pronumeRomanaArray.get((int) i));
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress = (i / pronumeEnglezaArray.size());
-                                Log.d("myTag", Double.toString(progress));
-                                try {
-                                    Thread.sleep(20);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
 
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setProgress((int) (progress * 100));
-                                    }
-                                });
-                            }
-
-                        }).start();
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();

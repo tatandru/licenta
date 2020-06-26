@@ -33,13 +33,14 @@ public class CuvinteRecyclerView extends RecyclerView.Adapter<CuvinteRecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull CuvinteRecyclerView.ItemsViewHolder holder, int position) {
+        final int pos=holder.getAdapterPosition();
         final String cuvant = this.cuvinte.get(position);
         holder.textItem.setText(cuvant);
         holder.locationItemRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (itemClickListener != null) {
-                    itemClickListener.onClick(cuvant);
+                    itemClickListener.onClick(cuvant,pos);
                 }
             }
         });
@@ -55,16 +56,19 @@ public class CuvinteRecyclerView extends RecyclerView.Adapter<CuvinteRecyclerVie
         private final TextView textItem;
 
 
+
         ItemsViewHolder(final View itemView) {
             super(itemView);
             this.locationItemRoot = itemView.findViewById(R.id.cl_optiune_root_item);
             this.textItem = itemView.findViewById(R.id.textOptiune);
 
+
+
         }
     }
 
     public interface ItemClickListener {
-        void onClick(String cuvant);
+        void onClick(String cuvant,int position);
     }
 
     public void setCategoryClickListener(ItemClickListener itemClickListener) {

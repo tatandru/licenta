@@ -39,9 +39,6 @@ public class LegumeFragment extends Fragment {
     private ArrayList<String> legumeEnglezaArray;
     private Button avanseaza;
     private double i;
-    private ProgressBar progressBar;
-    private double progress;
-    private Handler handler = new Handler();
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -52,7 +49,6 @@ public class LegumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        progressBar = view.findViewById(R.id.progressBar);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleLegumeRo");
@@ -72,8 +68,6 @@ public class LegumeFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        progressBar.setProgress(0);
-        progressBar.setMax((legumeEnglezaArray.size() / legumeEnglezaArray.size()) * 100);
         legumeEngleza.setText(legumeEnglezaArray.get((int) i));
         legumeRomana.setText(legumeRomanaArray.get((int) i));
         avanseazaButton();
@@ -182,31 +176,11 @@ public class LegumeFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= legumeEnglezaArray.size()) {
-                        progressBar.setProgress((legumeEnglezaArray.size() / legumeEnglezaArray.size()) * 100);
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
                         legumeEngleza.setText(legumeEnglezaArray.get((int) i));
                         legumeRomana.setText(legumeRomanaArray.get((int) i));
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                progress = (i / legumeEnglezaArray.size());
-                                Log.d("myTag", Double.toString(progress));
-                                try {
-                                    Thread.sleep(20);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
 
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        progressBar.setProgress((int) (progress * 100));
-                                    }
-                                });
-                            }
-
-                        }).start();
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();

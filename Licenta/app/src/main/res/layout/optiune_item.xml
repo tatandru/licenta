@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_optiune_root_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="20dp"
-    android:id="@+id/cl_optiune_root_item">
+
+    android:background="@color/colorPrimaryDark">
+
+
+
     <TextView
+        android:id="@+id/textOptiune"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/textOptiune"
         android:text="Cuvant"
-        android:background="@color/colorPrimaryDark"
         android:textAlignment="viewStart"
         android:textColor="@android:color/white"
-        />
+        app:layout_constraintEnd_toStartOf="@id/textOptiuneAlege"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
+        android:id="@+id/textOptiuneAlege"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/textOptiune"
-        app:layout_constraintEnd_toEndOf="@id/textOptiune"
-        app:layout_constraintBottom_toBottomOf="@id/textOptiune"
-        android:text="Alege"
-        android:id="@+id/textOptiuneAlege"
-        android:elevation="2dp"
         android:layout_marginEnd="10dp"
+        android:elevation="2dp"
+        android:text="Alege"
         android:textColor="@android:color/white"
-        />
+        app:layout_constraintBottom_toBottomOf="@id/textOptiune"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/textOptiune" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

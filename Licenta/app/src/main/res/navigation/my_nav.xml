@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_adjectiveFragment_to_ttestFragmentt"
             app:destination="@id/ttestFragmentt" />
+        <action
+            android:id="@+id/action_adjectiveFragment_to_listaTestFragment"
+            app:destination="@id/listaTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/animaleFragment"
@@ -52,6 +55,9 @@
         <action
             android:id="@+id/action_listaTestFragment_to_ttestFragmentt"
             app:destination="@id/ttestFragmentt" />
+        <action
+            android:id="@+id/action_listaTestFragment_to_adjectiveFragment"
+            app:destination="@id/adjectiveFragment" />
     </fragment>
     <fragment
         android:id="@+id/locatieFragment"
