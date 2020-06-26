@@ -45,6 +45,7 @@ public class LocatieFragment extends Fragment {
     private ArrayList<String> raspunsuriRomanaArray;
     private ArrayList<String> raspunsuriEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,12 +62,14 @@ public class LocatieFragment extends Fragment {
         TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
         STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
         avanseaza = view.findViewById(R.id.avanseazaLectii);
+        inapoi=view.findViewById(R.id.inapoiLectii);
 
         try {
             Bundle bundleQEn = getArguments().getBundle("bundleIntrebariLocEn");
             Bundle bundleQRo = getArguments().getBundle("bundleIntrebariLocRo");
             Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriLocEn");
             Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriLocRo");
+            i = getArguments().getInt("pozitie");
             intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariLocatieRo");
             intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariLocatieEn");
             raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriLocatieRo");
@@ -92,6 +95,7 @@ public class LocatieFragment extends Fragment {
         raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
         raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -230,5 +234,20 @@ public class LocatieFragment extends Fragment {
             }
         });
 
+    }
+    private void inapoiButton(){
+        i--;
+        if (i >= 0) {
+            verificareIntrebare.setTextColor(Color.BLACK);
+            verificareIntrebare.setText("");
+            verificareRaspuns.setTextColor(Color.BLACK);
+            verificareRaspuns.setText("");
+            intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
+            intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
+            raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
+            raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
+        } else {
+            Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+        }
     }
 }

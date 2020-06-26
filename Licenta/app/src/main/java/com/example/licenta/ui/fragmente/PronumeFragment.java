@@ -41,6 +41,7 @@ public class PronumeFragment extends Fragment {
     private ArrayList<String> pronumeRomanaArray;
     private ArrayList<String> pronumeEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
 
@@ -59,11 +60,13 @@ public class PronumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi = view.findViewById(R.id.inapoi);
 
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundlePronumeRo");
             Bundle bundleEn = getArguments().getBundle("bundlePronumeEn");
+            i = getArguments().getInt("pozitie");
             pronumeRomanaArray = bundleRo.getStringArrayList("pronumeRomana");
             pronumeEnglezaArray = bundleEn.getStringArrayList("pronumeEngleza");
 
@@ -84,6 +87,7 @@ public class PronumeFragment extends Fragment {
         pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
         pronumeRomana.setText(pronumeRomanaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -199,6 +203,24 @@ public class PronumeFragment extends Fragment {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+    }
+
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
+                    pronumeRomana.setText(pronumeRomanaArray.get((int) i));
+                } else {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

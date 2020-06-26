@@ -7,10 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 
@@ -18,20 +16,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import android.widget.Toast;
-
-import com.example.licenta.ui.fragmente.AdjectiveFragment;
-import com.example.licenta.ui.fragmente.AnimaleFragment;
-import com.example.licenta.ui.fragmente.FructeFragment;
-import com.example.licenta.ui.fragmente.InterumaneFragment;
-import com.example.licenta.ui.fragmente.LegumeFragment;
-import com.example.licenta.ui.fragmente.ListaTestFragment;
-import com.example.licenta.ui.fragmente.LocatieFragment;
-import com.example.licenta.ui.fragmente.NecunoscutFragment;
-import com.example.licenta.ui.fragmente.ObiecteFragment;
-import com.example.licenta.ui.fragmente.PronumeFragment;
-import com.example.licenta.ui.fragmente.TemporalFragment;
-import com.example.licenta.ui.fragmente.ZileSaptamanaFragment;
 import com.example.licenta.ui.fragmente.ttestFragmentt;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -126,16 +110,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         switch (id) {
-            case R.id.test:
-                try {
-                    Bundle bundle = new Bundle();
-                    bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
-                    bundle.putBundle("bundleAdjectiveEn", bundleAdjectiveEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_listaTestFragment,bundle);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
             case R.id.adjective:
                 //Toast.makeText(MainActivity.this, "Adjective", Toast.LENGTH_SHORT).show();
                 try {
@@ -143,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleAdjectiveRo", bundleAdjectiveRo);
                     bundle.putBundle("bundleAdjectiveEn", bundleAdjectiveEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_adjectiveFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaAdjectiveFragment,bundle);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -156,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleAnimaleRo", bundleAnimaleRo);
                     bundle.putBundle("bundleAnimaleEn", bundleAnimaleEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_animaleFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaAnimaleFragment,bundle);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -168,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleObiecteRo", bundleObiecteRo);
                     bundle.putBundle("bundleObiecteEn", bundleObiecteEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_obiecteFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaObiecteFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -178,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundlePronumeEn", bundlePronumeEn);
                     bundle.putBundle("bundlePronumeRo", bundlePronumeRo);
-                    navController.navigate(R.id.action_ttestFragmentt_to_pronumeFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaPronumeFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -189,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleFructeRo", bundleFructeRo);
                     bundle.putBundle("bundleFructeEn", bundleFructeEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_fructeFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaFructeFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -200,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleZileRo", bundleZileRo);
                     bundle.putBundle("bundleZileEn", bundleZileEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_zileSaptamanaFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaZileSaptamanaFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -212,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     Bundle bundle = new Bundle();
                     bundle.putBundle("bundleLegumeRo", bundleLegumeRo);
                     bundle.putBundle("bundleLegumeEn", bundleLegumeEn);
-                    navController.navigate(R.id.action_ttestFragmentt_to_legumeFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaLegumeFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -224,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bundle.putBundle("bundleIntrebariLocRo", bundleIntrebariLocRo);
                     bundle.putBundle("bundleRaspunsuriLocEn", bundleRaspunsuriLocEn);
                     bundle.putBundle("bundleRaspunsuriLocRo", bundleRaspunsuriLocRo);
-                    navController.navigate(R.id.action_ttestFragmentt_to_locatieFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaLocatieFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -236,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bundle.putBundle("bundleIntrebariTempRo", bundleIntrebariTempRo);
                     bundle.putBundle("bundleRaspunsuriTempEn", bundleRaspunsuriTempEn);
                     bundle.putBundle("bundleRaspunsuriTempRo", bundleRaspunsuriTempRo);
-                    navController.navigate(R.id.action_ttestFragmentt_to_temporalFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaTemporalFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -248,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bundle.putBundle("bundleIntrebariUmaneRo", bundleIntrebariUmaneRo);
                     bundle.putBundle("bundleRaspunsuriUmaneEn", bundleRaspunsuriUmaneEn);
                     bundle.putBundle("bundleRaspunsuriUmaneRo", bundleRaspunsuriUmaneRo);
-                    navController.navigate(R.id.action_ttestFragmentt_to_interumaneFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaInterumaneFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -260,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     bundle.putBundle("bundleIntrebariNecunoscutRo", bundleIntrebariNecunoscutRo);
                     bundle.putBundle("bundleRaspunsuriNecunoscutEn", bundleRaspunsuriNecunoscutEn);
                     bundle.putBundle("bundleRaspunsuriNecunoscutRo", bundleRaspunsuriNecunoscutRo);
-                    navController.navigate(R.id.action_ttestFragmentt_to_necunoscutFragment,bundle);
+                    navController.navigate(R.id.action_ttestFragmentt_to_listaNecunoscutFragment,bundle);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

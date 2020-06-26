@@ -38,6 +38,7 @@ public class FructeFragment extends Fragment {
     private ArrayList<String> fructeRomanaArray;
     private ArrayList<String> fructeEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
 
@@ -50,11 +51,13 @@ public class FructeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi=view.findViewById(R.id.inapoi);
 
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleFructeRo");
             Bundle bundleEn = getArguments().getBundle("bundleFructeEn");
+            i = getArguments().getInt("pozitie");
             fructeRomanaArray = bundleRo.getStringArrayList("fructeRomana");
             fructeEnglezaArray = bundleEn.getStringArrayList("fructeEngleza");
 
@@ -74,6 +77,7 @@ public class FructeFragment extends Fragment {
         fructeEngleza.setText(fructeEnglezaArray.get((int)i));
         fructeRomana.setText(fructeRomanaArray.get((int)i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -188,6 +192,23 @@ public class FructeFragment extends Fragment {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+    }
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    fructeEngleza.setText(fructeEnglezaArray.get((int) i));
+                    fructeRomana.setText(fructeRomanaArray.get((int) i));
+                } else {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

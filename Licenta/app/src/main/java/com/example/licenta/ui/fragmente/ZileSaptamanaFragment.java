@@ -39,6 +39,7 @@ public class ZileSaptamanaFragment extends Fragment {
     private ArrayList<String> zileEnglezaArray;
     private Button avanseaza;
     private double i;
+    private Button inapoi;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -50,11 +51,13 @@ public class ZileSaptamanaFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi = view.findViewById(R.id.inapoi);
 
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleZileRo");
             Bundle bundleEn = getArguments().getBundle("bundleZileEn");
+            i = getArguments().getInt("pozitie");
             zileRomanaArray = bundleRo.getStringArrayList("zileSaptamanaRomana");
             zileEnglezaArray = bundleEn.getStringArrayList("zileSaptamanaEngleza");
 
@@ -70,9 +73,10 @@ public class ZileSaptamanaFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        zileEngleza.setText(zileEnglezaArray.get((int)i));
-        zileRomana.setText(zileRomanaArray.get((int)i));
+        zileEngleza.setText(zileEnglezaArray.get((int) i));
+        zileRomana.setText(zileRomanaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -188,6 +192,24 @@ public class ZileSaptamanaFragment extends Fragment {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+    }
+
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    zileEngleza.setText(zileEnglezaArray.get((int) i));
+                    zileRomana.setText(zileRomanaArray.get((int) i));
+                } else {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

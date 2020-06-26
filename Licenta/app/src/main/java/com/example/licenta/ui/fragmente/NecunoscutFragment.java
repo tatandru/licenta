@@ -45,6 +45,7 @@ public class NecunoscutFragment extends Fragment {
     private ArrayList<String> raspunsuriRomanaArray;
     private ArrayList<String> raspunsuriEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -61,6 +62,7 @@ public class NecunoscutFragment extends Fragment {
         TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
         STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
         avanseaza = view.findViewById(R.id.avanseazaLectii);
+        inapoi=view.findViewById(R.id.inapoiLectii);
 
 
         try {
@@ -68,6 +70,7 @@ public class NecunoscutFragment extends Fragment {
             Bundle bundleQRo = getArguments().getBundle("bundleIntrebariNecunoscutRo");
             Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriNecunoscutEn");
             Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriNecunoscutRo");
+            i = getArguments().getInt("pozitie");
             intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariNecunoscutRo");
             intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariNecunoscutEn");
             raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriNecunoscutRo");
@@ -92,6 +95,7 @@ public class NecunoscutFragment extends Fragment {
         raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
         raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -230,5 +234,20 @@ public class NecunoscutFragment extends Fragment {
             }
         });
 
+    }
+    private void inapoiButton(){
+        i--;
+        if (i >= 0) {
+            verificareIntrebare.setTextColor(Color.BLACK);
+            verificareIntrebare.setText("");
+            verificareRaspuns.setTextColor(Color.BLACK);
+            verificareRaspuns.setText("");
+            intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
+            intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
+            raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
+            raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
+        } else {
+            Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+        }
     }
 }

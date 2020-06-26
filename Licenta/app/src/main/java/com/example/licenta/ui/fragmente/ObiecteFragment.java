@@ -38,6 +38,7 @@ public class ObiecteFragment extends Fragment {
     private ArrayList<String> obiecteRomanaArray;
     private ArrayList<String> obiecteEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
 
@@ -50,11 +51,13 @@ public class ObiecteFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi=view.findViewById(R.id.inapoi);
 
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleObiecteRo");
             Bundle bundleEn = getArguments().getBundle("bundleObiecteEn");
+            i = getArguments().getInt("pozitie");
             obiecteRomanaArray = bundleRo.getStringArrayList("obiecteRomana");
             obiecteEnglezaArray = bundleEn.getStringArrayList("obiecteEngleza");
 
@@ -73,7 +76,7 @@ public class ObiecteFragment extends Fragment {
         obiectEngleza.setText(obiecteEnglezaArray.get((int) i));
         obiectRomana.setText(obiecteRomanaArray.get((int) i));
         avanseazaButton();
-
+        inapoiButton();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -187,6 +190,23 @@ public class ObiecteFragment extends Fragment {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+    }
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    obiectEngleza.setText(obiecteEnglezaArray.get((int) i));
+                    obiectRomana.setText(obiecteRomanaArray.get((int) i));
+                } else {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

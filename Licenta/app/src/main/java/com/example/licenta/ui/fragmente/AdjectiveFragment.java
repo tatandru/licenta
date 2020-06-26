@@ -50,14 +50,13 @@ public class AdjectiveFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi=view.findViewById(R.id.inapoi);
-
+        inapoi = view.findViewById(R.id.inapoi);
 
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleAdjectiveRo");
             Bundle bundleEn = getArguments().getBundle("bundleAdjectiveEn");
-            i=getArguments().getInt("pozitie");
+            i = getArguments().getInt("pozitie");
             adjectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
             adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
 
@@ -73,9 +72,10 @@ public class AdjectiveFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        adjectiveEngleza.setText(adjectiveEnglezaArray.get((int)i));
-        adjectiveRomana.setText(adjectiveRomanaArray.get((int)i));
+        adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
+        adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -193,5 +193,22 @@ public class AdjectiveFragment extends Fragment {
         });
 
     }
-    private void inapoiButton(){}
+
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
+                    adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));
+                } else {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
 }

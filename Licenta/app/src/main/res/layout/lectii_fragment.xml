@@ -22,9 +22,9 @@
         android:layout_margin="50dp"
         android:layout_marginTop="136dp"
         android:text="Intrebare Engleza"
+        app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii1"
         app:layout_constraintEnd_toStartOf="@id/textToSpeechButtonLectii1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii1"
         app:layout_constraintTop_toBottomOf="@id/intrebareRomanaLectii" />
 
     <TextView
@@ -43,9 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:text="Raspuns Engleza"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/verificarePronuntieLectii2"
         app:layout_constraintEnd_toStartOf="@id/textToSpeechButtonLectii2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/raspunsRomanaLectii"
 
         />
@@ -67,10 +67,10 @@
         android:layout_height="wrap_content"
         android:text=""
         android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="@id/speechToTextButtonLectii2"
         app:layout_constraintEnd_toStartOf="@id/speechToTextButtonLectii2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/raspunsEnglezaLectii"
-        app:layout_constraintBottom_toBottomOf="@id/speechToTextButtonLectii2"/>
+        app:layout_constraintTop_toBottomOf="@id/raspunsEnglezaLectii" />
 
     <Button
         android:id="@+id/textToSpeechButtonLectii1"
@@ -98,10 +98,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:text="Press To Speak"
-        app:layout_constraintTop_toBottomOf="@id/intrebareEnglezaLectii"
-        app:layout_constraintStart_toEndOf="@id/verificarePronuntieLectii1"
+        app:layout_constraintBottom_toTopOf="@id/raspunsRomanaLectii"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/raspunsRomanaLectii"/>
+        app:layout_constraintStart_toEndOf="@id/verificarePronuntieLectii1"
+        app:layout_constraintTop_toBottomOf="@id/intrebareEnglezaLectii" />
 
     <Button
         android:id="@+id/speechToTextButtonLectii2"
@@ -109,21 +109,29 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:text="Press To Speak"
-        app:layout_constraintBottom_toTopOf="@+id/raspunsRomanaLectii"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
         app:layout_constraintStart_toEndOf="@id/verificarePronuntieLectii1"
-        app:layout_constraintTop_toBottomOf="@id/raspunsEnglezaLectii"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/raspunsEnglezaLectii" />
 
     <Button
         android:id="@+id/avanseazaLectii"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Avanseaza"
-        app:layout_constraintTop_toBottomOf="@id/speechToTextButtonLectii2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/inapoiLectii"
+        app:layout_constraintTop_toBottomOf="@id/speechToTextButtonLectii2" />
+
+    <Button
+        android:id="@+id/inapoiLectii"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Inapoi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/avanseazaLectii"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/speechToTextButtonLectii2" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,10 +18,10 @@ import com.example.licenta.adapter.CuvinteRecyclerView;
 
 import java.util.ArrayList;
 
-public class ListaTestFragment extends Fragment {
+public class ListaLegumeFragment extends Fragment {
     private RecyclerView recyclerView;
-    private ArrayList<String> adjectiveRomanaArray;
-    private ArrayList<String> adjectiveEnglezaArray;
+    private ArrayList<String> legumeRomanaArray;
+    private ArrayList<String> legumeEnglezaArray;
     private CuvinteRecyclerView adapter;
     private RecyclerView.LayoutManager layoutManager;
     private NavController navController;
@@ -38,10 +36,10 @@ public class ListaTestFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_optiuni);
         navController = Navigation.findNavController(getActivity(), R.id.fragment_container);
         try {
-            bundleRo = getArguments().getBundle("bundleAdjectiveRo");
-            bundleEn = getArguments().getBundle("bundleAdjectiveEn");
-            adjectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
-            adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
+             bundleRo = getArguments().getBundle("bundleLegumeRo");
+             bundleEn = getArguments().getBundle("bundleLegumeEn");
+            legumeRomanaArray = bundleRo.getStringArrayList("legumeRomana");
+            legumeEnglezaArray = bundleEn.getStringArrayList("legumeEngleza");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,24 +51,18 @@ public class ListaTestFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());  // use a linear layout manager vertical
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        adapter = new CuvinteRecyclerView(adjectiveRomanaArray, getContext());
+        adapter = new CuvinteRecyclerView(legumeRomanaArray, getContext());
         adapter.setCategoryClickListener(new CuvinteRecyclerView.ItemClickListener() {
             @Override
             public void onClick(String cuvant,int pos) {
-                Toast.makeText(getContext(), "Incearca din nou", Toast.LENGTH_SHORT).show();
 
                 Bundle bundle = new Bundle();
-                bundle.putBundle("bundleAdjectiveRo", bundleRo);
-                bundle.putBundle("bundleAdjectiveEn", bundleEn);
+                bundle.putBundle("bundleLegumeRo", bundleRo);
+                bundle.putBundle("bundleLegumeEn", bundleEn);
                 bundle.putInt("pozitie",pos);
-                navController.navigate(R.id.action_listaTestFragment_to_adjectiveFragment,bundle);
+                navController.navigate(R.id.action_listaFructeFragment_to_fructeFragment,bundle);
             }
         });
         recyclerView.setAdapter(adapter);
     }
 }
-
-
-
-
-

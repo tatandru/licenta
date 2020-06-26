@@ -38,6 +38,7 @@ public class LegumeFragment extends Fragment {
     private ArrayList<String> legumeRomanaArray;
     private ArrayList<String> legumeEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -49,10 +50,12 @@ public class LegumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi=view.findViewById(R.id.inapoi);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleLegumeRo");
             Bundle bundleEn = getArguments().getBundle("bundleLegumeEn");
+            i = getArguments().getInt("pozitie");
             legumeRomanaArray = bundleRo.getStringArrayList("legumeRomana");
             legumeEnglezaArray = bundleEn.getStringArrayList("legumeEngleza");
 
@@ -71,6 +74,7 @@ public class LegumeFragment extends Fragment {
         legumeEngleza.setText(legumeEnglezaArray.get((int) i));
         legumeRomana.setText(legumeRomanaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
@@ -186,6 +190,23 @@ public class LegumeFragment extends Fragment {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+    }
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificare.setTextColor(Color.BLACK);
+                    verificare.setText("");
+                    legumeEngleza.setText(legumeEnglezaArray.get((int) i));
+                    legumeRomana.setText(legumeRomanaArray.get((int) i));
+                } else {
+                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

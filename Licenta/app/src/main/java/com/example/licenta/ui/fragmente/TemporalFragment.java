@@ -45,6 +45,7 @@ public class TemporalFragment extends Fragment {
     private ArrayList<String> raspunsuriRomanaArray;
     private ArrayList<String> raspunsuriEnglezaArray;
     private Button avanseaza;
+    private Button inapoi;
     private double i;
 
 
@@ -62,11 +63,14 @@ public class TemporalFragment extends Fragment {
         TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
         STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
         avanseaza = view.findViewById(R.id.avanseazaLectii);
+        inapoi = view.findViewById(R.id.inapoiLectii);
+
         try {
             Bundle bundleQEn = getArguments().getBundle("bundleIntrebariTempEn");
             Bundle bundleQRo = getArguments().getBundle("bundleIntrebariTempRo");
             Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriTempEn");
             Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriTempRo");
+            i = getArguments().getInt("pozitie");
             intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariTempRo");
             intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariTempEn");
             raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriTempRo");
@@ -91,13 +95,14 @@ public class TemporalFragment extends Fragment {
         raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
         raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
         avanseazaButton();
+        inapoiButton();
 
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ArrayList<String> text=new ArrayList<>();
-        if(data!=null) {
+        ArrayList<String> text = new ArrayList<>();
+        if (data != null) {
             text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             text.replaceAll(new UnaryOperator<String>() {
                 @Override
@@ -124,7 +129,7 @@ public class TemporalFragment extends Fragment {
 
             case 20: {
                 if (text.contains(raspunsEngleza.getText())) {
-                    verificareRaspuns.setText(raspunsEngleza.getText()+"?");
+                    verificareRaspuns.setText(raspunsEngleza.getText() + "?");
                     verificareRaspuns.setTextColor(Color.GREEN);
                 } else {
                     verificareRaspuns.setText(text.get(0));
@@ -231,4 +236,21 @@ public class TemporalFragment extends Fragment {
         });
 
     }
+
+    private void inapoiButton() {
+        i--;
+        if (i >= 0) {
+            verificareIntrebare.setTextColor(Color.BLACK);
+            verificareIntrebare.setText("");
+            verificareRaspuns.setTextColor(Color.BLACK);
+            verificareRaspuns.setText("");
+            intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
+            intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
+            raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
+            raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
+        } else {
+            Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
