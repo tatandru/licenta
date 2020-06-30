@@ -51,7 +51,7 @@ public class InterumaneFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lectii_fragment, container, false);
         initUI(view);
-
+        getFromBundle();
 
         return view;
     }

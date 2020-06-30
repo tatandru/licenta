@@ -191,7 +191,6 @@ public class NecunoscutFragment extends Fragment {
             public void onClick(View view) {
                 if (verificareIntrebare.getCurrentTextColor() == Color.GREEN && verificareRaspuns.getCurrentTextColor() == Color.GREEN) {
                     i++;
-
                     verificareIntrebare.setTextColor(Color.BLACK);
                     verificareIntrebare.setText("");
                     verificareRaspuns.setTextColor(Color.BLACK);
