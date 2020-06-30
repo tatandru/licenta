@@ -51,7 +51,7 @@ public class AnimaleFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi=view.findViewById(R.id.inapoi);
+        inapoi = view.findViewById(R.id.inapoi);
 
 
         try {
@@ -73,8 +73,8 @@ public class AnimaleFragment extends Fragment {
         speechToTextButton();
         textToSpeechButton();
         initTextToSpeech();
-        animaleEngleza.setText(animaleEnglezaArray.get((int)i));
-        animaleRomana.setText(animaleRomanaArray.get((int)i));
+        animaleEngleza.setText(animaleEnglezaArray.get((int) i));
+        animaleRomana.setText(animaleRomanaArray.get((int) i));
         avanseazaButton();
         inapoiButton();
 
@@ -90,7 +90,7 @@ public class AnimaleFragment extends Fragment {
                     text.replaceAll(new UnaryOperator<String>() {
                         @Override
                         public String apply(String e) {
-                            return e.toLowerCase();
+                            return e.substring(0, 1).toUpperCase() + e.substring(1);
                         }
                     });
 
@@ -196,6 +196,7 @@ public class AnimaleFragment extends Fragment {
         });
 
     }
+
     private void inapoiButton() {
         inapoi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,8 +207,9 @@ public class AnimaleFragment extends Fragment {
                     verificare.setText("");
                     animaleEngleza.setText(animaleEnglezaArray.get((int) i));
                     animaleRomana.setText(animaleRomanaArray.get((int) i));
-                } else {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    if (i == 0) {
+                        inapoi.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });

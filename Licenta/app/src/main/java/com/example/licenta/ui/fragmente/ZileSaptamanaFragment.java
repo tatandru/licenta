@@ -89,7 +89,7 @@ public class ZileSaptamanaFragment extends Fragment {
                     text.replaceAll(new UnaryOperator<String>() {
                         @Override
                         public String apply(String e) {
-                            return e.toLowerCase();
+                            return e.substring(0, 1).toUpperCase() + e.substring(1);
                         }
                     });
                     if (text.contains(zileEngleza.getText())) {
@@ -207,8 +207,9 @@ public class ZileSaptamanaFragment extends Fragment {
                     verificare.setText("");
                     zileEngleza.setText(zileEnglezaArray.get((int) i));
                     zileRomana.setText(zileRomanaArray.get((int) i));
-                } else {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    if (i == 0) {
+                        inapoi.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });

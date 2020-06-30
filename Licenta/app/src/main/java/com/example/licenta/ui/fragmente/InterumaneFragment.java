@@ -63,7 +63,7 @@ public class InterumaneFragment extends Fragment {
         TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
         STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
         avanseaza = view.findViewById(R.id.avanseazaLectii);
-        inapoi=view.findViewById(R.id.inapoiLectii);
+        inapoi = view.findViewById(R.id.inapoiLectii);
 
         try {
             Bundle bundleQEn = getArguments().getBundle("bundleIntrebariUmaneEn");
@@ -91,10 +91,10 @@ public class InterumaneFragment extends Fragment {
         textToSpeechButton(TTSRaspuns, raspunsEngleza);
         initTextToSpeech();
 
-        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
-        intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
-        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
-        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
+        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i)+"?");
+        intrebabreRomana.setText(intrebareRomanaArray.get((int) i)+"?");
+        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i)+".");
+        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i)+".");
         avanseazaButton();
         inapoiButton();
 
@@ -102,8 +102,8 @@ public class InterumaneFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ArrayList<String> text=new ArrayList<>();
-        if(data!=null) {
+        ArrayList<String> text = new ArrayList<>();
+        if (data != null) {
             text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             text.replaceAll(new UnaryOperator<String>() {
                 @Override
@@ -115,8 +115,8 @@ public class InterumaneFragment extends Fragment {
         switch (requestCode) {
             case 10: {
                 if (resultCode == RESULT_OK) {
-                    if (text.contains(intrebareEngleza.getText())) {
-                        verificareIntrebare.setText(intrebareEngleza.getText()+"?");
+                    if (text.contains(intrebareEnglezaArray.get((int) i))) {
+                        verificareIntrebare.setText(intrebareEngleza.getText());
                         verificareIntrebare.setTextColor(Color.GREEN);
                     } else {
                         verificareIntrebare.setText(text.get(0));
@@ -129,7 +129,7 @@ public class InterumaneFragment extends Fragment {
             }
 
             case 20: {
-                if (text.contains(raspunsEngleza.getText())) {
+                if (text.contains(raspunsuriEnglezaArray.get((int) i))) {
                     verificareRaspuns.setText(raspunsEngleza.getText());
                     verificareRaspuns.setTextColor(Color.GREEN);
                 } else {
@@ -224,10 +224,10 @@ public class InterumaneFragment extends Fragment {
 
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
-                        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
-                        intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
-                        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
-                        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
+                        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i)+"?");
+                        intrebabreRomana.setText(intrebareRomanaArray.get((int) i)+"?");
+                        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i)+".");
+                        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i)+".");
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
@@ -237,19 +237,27 @@ public class InterumaneFragment extends Fragment {
         });
 
     }
-    private void inapoiButton(){
-        i--;
-        if (i >= 0) {
-            verificareIntrebare.setTextColor(Color.BLACK);
-            verificareIntrebare.setText("");
-            verificareRaspuns.setTextColor(Color.BLACK);
-            verificareRaspuns.setText("");
-            intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
-            intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
-            raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
-            raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
-        } else {
-            Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
-        }
+
+    private void inapoiButton() {
+        inapoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                i--;
+                if (i >= 0) {
+                    verificareIntrebare.setTextColor(Color.BLACK);
+                    verificareIntrebare.setText("");
+                    verificareRaspuns.setTextColor(Color.BLACK);
+                    verificareRaspuns.setText("");
+                    intrebareEngleza.setText(intrebareEnglezaArray.get((int) i)+"?");
+                    intrebabreRomana.setText(intrebareRomanaArray.get((int) i)+"?");
+                    raspunsRomana.setText(raspunsuriRomanaArray.get((int) i)+".");
+                    raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i)+".");
+                    if (i == 0) {
+                        inapoi.setVisibility(View.INVISIBLE);
+                    }
+                }
+            }
+        });
+
     }
 }

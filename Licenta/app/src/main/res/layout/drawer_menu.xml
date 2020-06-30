@@ -34,7 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#DFD1D1"
+        android:background="#f4845f"
+        app:itemTextColor="@android:color/white"
         app:menu="@menu/menu" />
 
 

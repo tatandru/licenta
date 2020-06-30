@@ -1,67 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <group android:id="@+id/menu_pronume">
-        <item
-            android:id="@+id/pronume"
-            android:title="Pronume" />
-    </group>
+    <item android:title="Cuvinte">
+        <menu>
+            <group android:id="@+id/menu_cuvinte">
+                <item
+                    android:id="@+id/pronume"
+                    android:title="Pronume" />
 
-    <group android:id="@+id/menu_adjective">
-        <item
-            android:id="@+id/adjective"
-            android:title="Adjective" />
-    </group>
-    <group android:id="@+id/menu_obiecte">
-        <item
-            android:id="@+id/obiecte"
-            android:title="Obiecte" />
-    </group>
-    <group android:id="@+id/menu_zileSaptamana">
-        <item
-            android:id="@+id/zileSaptamana"
-            android:title="Zilele Saptamanii" />
-    </group>
-    <group android:id="@+id/menu_legume">
-        <item
-            android:id="@+id/legume"
-            android:title="Legume" />
-    </group>
-    <group android:id="@+id/menu_fructe">
-        <item
-            android:id="@+id/fructe"
-            android:title="Fructe" />
-    </group>
-    <group android:id="@+id/menu_animale">
-        <item
-            android:id="@+id/animale"
-            android:title="Animale" />
-    </group>
-    <group android:id="@+id/menu_locatie">
-        <item
-            android:id="@+id/locatie"
-            android:title="QA Locatie" />
-    </group>
-    <group android:id="@+id/menu_Temporale">
-        <item
-            android:id="@+id/temporal"
-            android:title="QA Temporal" />
-    </group>
-    <group android:id="@+id/menu_interumane">
-        <item
-            android:id="@+id/interumane"
-            android:title="QA Interumane" />
-    </group>
-    <group android:id="@+id/menu_necunoscut">
-        <item
-            android:id="@+id/necunoscut"
-            android:title="QA Necunoscut" />
-    </group>
-    <group android:id="@+id/menu_test">
-        <item
-            android:id="@+id/test"
-            android:title="Test" />
-    </group>
+                <item
+                    android:id="@+id/adjective"
+                    android:title="Adjective" />
+
+
+                <item
+                    android:id="@+id/obiecte"
+                    android:title="Obiecte" />
+
+                <item
+                    android:id="@+id/zileSaptamana"
+                    android:title="Zilele Saptamanii" />
+
+                <item
+                    android:id="@+id/legume"
+                    android:title="Legume" />
+
+                <item
+                    android:id="@+id/fructe"
+                    android:title="Fructe" />
+
+                <item
+                    android:id="@+id/animale"
+                    android:title="Animale" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Intrebari si raspunsuri">
+        <menu>
+            <group android:id="@+id/QA">
+                <item
+                    android:id="@+id/locatie"
+                    android:title="QA Locatie" />
+
+                <item
+                    android:id="@+id/temporal"
+                    android:title="QA Temporal" />
+
+                <item
+                    android:id="@+id/interumane"
+                    android:title="QA Interumane" />
+
+                <item
+                    android:id="@+id/necunoscut"
+                    android:title="QA Necunoscut" />
+            </group>
+        </menu>
+    </item>
 
 
 </menu>

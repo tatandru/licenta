@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +86,7 @@ public class AdjectiveFragment extends Fragment {
                     text.replaceAll(new UnaryOperator<String>() {
                         @Override
                         public String apply(String e) {
-                            return e.toLowerCase();
+                            return e.substring(0, 1).toUpperCase() + e.substring(1);
                         }
                     });
                     if (text.contains(adjectiveEngleza.getText())) {
@@ -204,8 +202,9 @@ public class AdjectiveFragment extends Fragment {
                     verificare.setText("");
                     adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
                     adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));
-                } else {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    if (i == 0) {
+                        inapoi.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });

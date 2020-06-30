@@ -5,7 +5,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:background="#94E66F15"
+    android:background="#f25c54"
     android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
     android:fitsSystemWindows="true">
 

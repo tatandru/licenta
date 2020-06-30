@@ -100,7 +100,7 @@ public class PronumeFragment extends Fragment {
                     text.replaceAll(new UnaryOperator<String>() {
                         @Override
                         public String apply(String e) {
-                            return e.toLowerCase();
+                            return e.substring(0, 1).toUpperCase() + e.substring(1);
                         }
                     });
 
@@ -218,8 +218,9 @@ public class PronumeFragment extends Fragment {
                     verificare.setText("");
                     pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
                     pronumeRomana.setText(pronumeRomanaArray.get((int) i));
-                } else {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    if (i == 0) {
+                        inapoi.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });

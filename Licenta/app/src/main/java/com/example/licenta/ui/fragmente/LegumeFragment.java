@@ -50,7 +50,7 @@ public class LegumeFragment extends Fragment {
         TTS = view.findViewById(R.id.textToSpeechButton);
         STT = view.findViewById(R.id.speechToTextButton);
         avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi=view.findViewById(R.id.inapoi);
+        inapoi = view.findViewById(R.id.inapoi);
 
         try {
             Bundle bundleRo = getArguments().getBundle("bundleLegumeRo");
@@ -87,7 +87,7 @@ public class LegumeFragment extends Fragment {
                     text.replaceAll(new UnaryOperator<String>() {
                         @Override
                         public String apply(String e) {
-                            return e.toLowerCase();
+                            return e.substring(0, 1).toUpperCase() + e.substring(1);
                         }
                     });
 
@@ -194,6 +194,7 @@ public class LegumeFragment extends Fragment {
         });
 
     }
+
     private void inapoiButton() {
         inapoi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,8 +205,9 @@ public class LegumeFragment extends Fragment {
                     verificare.setText("");
                     legumeEngleza.setText(legumeEnglezaArray.get((int) i));
                     legumeRomana.setText(legumeRomanaArray.get((int) i));
-                } else {
-                    Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                    if (i == 0) {
+                        inapoi.setVisibility(View.INVISIBLE);
+                    }
                 }
             }
         });
