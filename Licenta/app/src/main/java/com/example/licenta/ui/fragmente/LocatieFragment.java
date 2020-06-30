@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,34 +49,8 @@ public class LocatieFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.lectii_fragment, container, false);
-        intrebabreRomana = view.findViewById(R.id.intrebareRomanaLectii);
-        intrebareEngleza = view.findViewById(R.id.intrebareEnglezaLectii);
-        raspunsEngleza = view.findViewById(R.id.raspunsEnglezaLectii);
-        raspunsRomana = view.findViewById(R.id.raspunsRomanaLectii);
-        verificareIntrebare = view.findViewById(R.id.verificarePronuntieLectii1);
-        verificareRaspuns = view.findViewById(R.id.verificarePronuntieLectii2);
-        TTSIntrebare = view.findViewById(R.id.textToSpeechButtonLectii1);
-        STTIntrebare = view.findViewById(R.id.speechToTextButtonLectii1);
-        TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
-        STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
-        avanseaza = view.findViewById(R.id.avanseazaLectii);
-        inapoi = view.findViewById(R.id.inapoiLectii);
-
-        try {
-            Bundle bundleQEn = getArguments().getBundle("bundleIntrebariLocEn");
-            Bundle bundleQRo = getArguments().getBundle("bundleIntrebariLocRo");
-            Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriLocEn");
-            Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriLocRo");
-            i = getArguments().getInt("pozitie");
-            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariLocatieRo");
-            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariLocatieEn");
-            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriLocatieRo");
-            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriLocatieEn");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        initUI(view);
+        getFromBundle();
         return view;
     }
 
@@ -89,11 +61,7 @@ public class LocatieFragment extends Fragment {
         speechToTextButton(STTRaspuns);
         textToSpeechButton(TTSRaspuns, raspunsEngleza);
         initTextToSpeech();
-
-        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i)+"?");
-        intrebabreRomana.setText(intrebareRomanaArray.get((int) i)+"?");
-        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i)+".");
-        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i)+".");
+        setQAText();
         avanseazaButton();
         inapoiButton();
 
@@ -102,17 +70,18 @@ public class LocatieFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ArrayList<String> text = new ArrayList<>();
-        if (data != null) {
-            text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            text.replaceAll(new UnaryOperator<String>() {
-                @Override
-                public String apply(String e) {
-                    return e.substring(0, 1).toUpperCase() + e.substring(1);
-                }
-            });
-        }
+
         switch (requestCode) {
             case 10: {
+                if (data != null) {
+                text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                text.replaceAll(new UnaryOperator<String>() {
+                    @Override
+                    public String apply(String e) {
+                        return e.substring(0, 1).toUpperCase() + e.substring(1)+"?";
+                    }
+                });
+            }
                 if (resultCode == RESULT_OK) {
                     if (text.contains(intrebareEnglezaArray.get((int) i))) {
                         verificareIntrebare.setText(intrebareEngleza.getText());
@@ -128,6 +97,15 @@ public class LocatieFragment extends Fragment {
             }
 
             case 20: {
+                if (data != null) {
+                    text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    text.replaceAll(new UnaryOperator<String>() {
+                        @Override
+                        public String apply(String e) {
+                            return e.substring(0, 1).toUpperCase() + e.substring(1)+".";
+                        }
+                    });
+                }
                 if (text.contains(raspunsuriEnglezaArray.get((int) i))) {
                     verificareRaspuns.setText(raspunsEngleza.getText());
                     verificareRaspuns.setTextColor(Color.GREEN);
@@ -222,10 +200,7 @@ public class LocatieFragment extends Fragment {
                     if (i >= intrebareEnglezaArray.size()) {
                         Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
                     } else {
-                        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i)+"?");
-                        intrebabreRomana.setText(intrebareRomanaArray.get((int) i)+"?");
-                        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i)+".");
-                        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i)+".");
+                        setQAText();
                     }
                 } else {
                     Toast.makeText(getContext(), "Incearca sa pronunti.", Toast.LENGTH_SHORT).show();
@@ -246,10 +221,7 @@ public class LocatieFragment extends Fragment {
                     verificareIntrebare.setText("");
                     verificareRaspuns.setTextColor(Color.BLACK);
                     verificareRaspuns.setText("");
-                    intrebareEngleza.setText(intrebareEnglezaArray.get((int) i)+"?");
-                    intrebabreRomana.setText(intrebareRomanaArray.get((int) i)+"?");
-                    raspunsRomana.setText(raspunsuriRomanaArray.get((int) i)+".");
-                    raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i)+".");
+                    setQAText();
                     if (i == 0) {
                         inapoi.setVisibility(View.INVISIBLE);
                     }
@@ -257,5 +229,42 @@ public class LocatieFragment extends Fragment {
             }
         });
 
+    }
+    private void setQAText(){
+        intrebareEngleza.setText(intrebareEnglezaArray.get((int) i));
+        intrebabreRomana.setText(intrebareRomanaArray.get((int) i));
+        raspunsRomana.setText(raspunsuriRomanaArray.get((int) i));
+        raspunsEngleza.setText(raspunsuriEnglezaArray.get((int) i));
+    }
+    private void initUI(View view){
+        intrebabreRomana = view.findViewById(R.id.intrebareRomanaLectii);
+        intrebareEngleza = view.findViewById(R.id.intrebareEnglezaLectii);
+        raspunsEngleza = view.findViewById(R.id.raspunsEnglezaLectii);
+        raspunsRomana = view.findViewById(R.id.raspunsRomanaLectii);
+        verificareIntrebare = view.findViewById(R.id.verificarePronuntieLectii1);
+        verificareRaspuns = view.findViewById(R.id.verificarePronuntieLectii2);
+        TTSIntrebare = view.findViewById(R.id.textToSpeechButtonLectii1);
+        STTIntrebare = view.findViewById(R.id.speechToTextButtonLectii1);
+        TTSRaspuns = view.findViewById(R.id.textToSpeechButtonLectii2);
+        STTRaspuns = view.findViewById(R.id.speechToTextButtonLectii2);
+        avanseaza = view.findViewById(R.id.avanseazaLectii);
+        inapoi = view.findViewById(R.id.inapoiLectii);
+    }
+    private void getFromBundle(){
+        try {
+            Bundle bundleQEn = getArguments().getBundle("bundleIntrebariLocEn");
+            Bundle bundleQRo = getArguments().getBundle("bundleIntrebariLocRo");
+            Bundle bundleAEn = getArguments().getBundle("bundleRaspunsuriLocEn");
+            Bundle bundleARo = getArguments().getBundle("bundleRaspunsuriLocRo");
+            i = getArguments().getInt("pozitie");
+            intrebareRomanaArray = bundleQRo.getStringArrayList("intrebariLocatieRo");
+            intrebareEnglezaArray = bundleQEn.getStringArrayList("intrebariLocatieEn");
+            raspunsuriRomanaArray = bundleARo.getStringArrayList("raspunsuriLocatieRo");
+            raspunsuriEnglezaArray = bundleAEn.getStringArrayList("raspunsuriLocatieEn");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
