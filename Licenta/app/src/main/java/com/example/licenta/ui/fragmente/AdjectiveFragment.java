@@ -164,7 +164,8 @@ public class AdjectiveFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= adjectiveEnglezaArray.size()) {
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
+
                     } else {
                         adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
                         adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));

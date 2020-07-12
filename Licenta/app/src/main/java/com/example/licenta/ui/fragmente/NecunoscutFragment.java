@@ -199,7 +199,7 @@ public class NecunoscutFragment extends Fragment {
                     verificareRaspuns.setTextColor(Color.BLACK);
                     verificareRaspuns.setText("");
                     if (i >= intrebareEnglezaArray.size()) {
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
                     } else {
                         setQAText();
 

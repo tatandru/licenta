@@ -177,7 +177,7 @@ public class PronumeFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= pronumeEnglezaArray.size()) {
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
                     } else {
                         pronumeEngleza.setText(pronumeEnglezaArray.get((int) i));
                         pronumeRomana.setText(pronumeRomanaArray.get((int) i));

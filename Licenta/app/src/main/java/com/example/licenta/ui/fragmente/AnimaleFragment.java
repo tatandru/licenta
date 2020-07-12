@@ -171,7 +171,7 @@ public class AnimaleFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= animaleEnglezaArray.size()) {
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
                     } else {
                         animaleEngleza.setText(animaleEnglezaArray.get((int) i));
                         animaleRomana.setText(animaleRomanaArray.get((int) i));

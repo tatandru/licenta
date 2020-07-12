@@ -171,7 +171,7 @@ public class FructeFragment extends Fragment {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     if (i >= fructeEnglezaArray.size()) {
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
                     } else {
                         fructeEngleza.setText(fructeEnglezaArray.get((int) i));
                         fructeRomana.setText(fructeRomanaArray.get((int) i));

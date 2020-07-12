@@ -202,7 +202,7 @@ public class TemporalFragment extends Fragment {
                     verificareRaspuns.setText("");
                     if (i >= intrebareEnglezaArray.size()) {
 
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
                     } else {
                         setQAText();
 

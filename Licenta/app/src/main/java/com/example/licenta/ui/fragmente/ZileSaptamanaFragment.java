@@ -166,7 +166,7 @@ public class ZileSaptamanaFragment extends Fragment {
                     verificare.setText("");
                     if (i >= zileEnglezaArray.size()) {
 
-                        Toast.makeText(getContext(), "Felicitari", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Ati ajuns la final", Toast.LENGTH_SHORT).show();
                     } else {
                         zileEngleza.setText(zileEnglezaArray.get((int) i));
                         zileRomana.setText(zileRomanaArray.get((int) i));

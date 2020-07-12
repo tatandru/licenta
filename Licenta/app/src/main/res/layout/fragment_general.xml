@@ -31,7 +31,6 @@
         android:id="@+id/verificarePronuntie"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:text=""
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
