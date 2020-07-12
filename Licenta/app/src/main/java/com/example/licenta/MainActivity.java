@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     e.printStackTrace();
                 }
                 break;
-            case R.id.obiecte:
+            case R.id.substantive:
                 //Toast.makeText(MainActivity.this, "Obiecte", Toast.LENGTH_SHORT).show();
                 try {
                     Bundle bundle = new Bundle();

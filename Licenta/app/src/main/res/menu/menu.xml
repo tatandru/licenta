@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:title="Cuvinte">
+    <item android:title="Vocabular">
         <menu>
             <group android:id="@+id/menu_cuvinte">
                 <item
@@ -14,8 +14,8 @@
 
 
                 <item
-                    android:id="@+id/obiecte"
-                    android:title="Obiecte" />
+                    android:id="@+id/substantive"
+                    android:title="Substantive" />
 
                 <item
                     android:id="@+id/zileSaptamana"
