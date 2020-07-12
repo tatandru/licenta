@@ -43,28 +43,16 @@ public class ObiecteFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_general, container, false);
-        obiectRomana = view.findViewById(R.id.cuvantRomana);
-        obiectEngleza = view.findViewById(R.id.cuvantEngleza);
-        verificare = view.findViewById(R.id.verificarePronuntie);
-        TTS = view.findViewById(R.id.textToSpeechButton);
-        STT = view.findViewById(R.id.speechToTextButton);
-        avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi = view.findViewById(R.id.inapoi);
+        initUI(view);
+        getFromBundle();
 
 
-        try {
-            Bundle bundleRo = getArguments().getBundle("bundleObiecteRo");
-            Bundle bundleEn = getArguments().getBundle("bundleObiecteEn");
-            i = getArguments().getInt("pozitie");
-            obiecteRomanaArray = bundleRo.getStringArrayList("obiecteRomana");
-            obiecteEnglezaArray = bundleEn.getStringArrayList("obiecteEngleza");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (i == 0) {
+            inapoi.setVisibility(View.INVISIBLE);
         }
         return view;
     }
+
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -209,6 +197,31 @@ public class ObiecteFragment extends Fragment {
                 }
             }
         });
+
+    }
+
+    private void initUI(View view) {
+        obiectRomana = view.findViewById(R.id.cuvantRomana);
+        obiectEngleza = view.findViewById(R.id.cuvantEngleza);
+        verificare = view.findViewById(R.id.verificarePronuntie);
+        TTS = view.findViewById(R.id.textToSpeechButton);
+        STT = view.findViewById(R.id.speechToTextButton);
+        avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi = view.findViewById(R.id.inapoi);
+    }
+
+    private void getFromBundle() {
+        try {
+            Bundle bundleRo = getArguments().getBundle("bundleObiecteRo");
+            Bundle bundleEn = getArguments().getBundle("bundleObiecteEn");
+            i = getArguments().getInt("pozitie");
+            obiecteRomanaArray = bundleRo.getStringArrayList("obiecteRomana");
+            obiecteEnglezaArray = bundleEn.getStringArrayList("obiecteEngleza");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

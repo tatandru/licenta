@@ -43,25 +43,11 @@ public class ZileSaptamanaFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_general, container, false);
-        zileRomana = view.findViewById(R.id.cuvantRomana);
-        zileEngleza = view.findViewById(R.id.cuvantEngleza);
-        verificare = view.findViewById(R.id.verificarePronuntie);
-        TTS = view.findViewById(R.id.textToSpeechButton);
-        STT = view.findViewById(R.id.speechToTextButton);
-        avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi = view.findViewById(R.id.inapoi);
+        initUI(view);
+        getFromBundle();
 
-
-        try {
-            Bundle bundleRo = getArguments().getBundle("bundleZileRo");
-            Bundle bundleEn = getArguments().getBundle("bundleZileEn");
-            i = getArguments().getInt("pozitie");
-            zileRomanaArray = bundleRo.getStringArrayList("zileSaptamanaRomana");
-            zileEnglezaArray = bundleEn.getStringArrayList("zileSaptamanaEngleza");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (i == 0) {
+            inapoi.setVisibility(View.INVISIBLE);
         }
         return view;
     }
@@ -212,5 +198,29 @@ public class ZileSaptamanaFragment extends Fragment {
             }
         });
 
+    }
+
+    private void initUI(View view) {
+        zileRomana = view.findViewById(R.id.cuvantRomana);
+        zileEngleza = view.findViewById(R.id.cuvantEngleza);
+        verificare = view.findViewById(R.id.verificarePronuntie);
+        TTS = view.findViewById(R.id.textToSpeechButton);
+        STT = view.findViewById(R.id.speechToTextButton);
+        avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi = view.findViewById(R.id.inapoi);
+    }
+
+    private void getFromBundle() {
+        try {
+            Bundle bundleRo = getArguments().getBundle("bundleZileRo");
+            Bundle bundleEn = getArguments().getBundle("bundleZileEn");
+            i = getArguments().getInt("pozitie");
+            zileRomanaArray = bundleRo.getStringArrayList("zileSaptamanaRomana");
+            zileEnglezaArray = bundleEn.getStringArrayList("zileSaptamanaEngleza");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -23,12 +23,12 @@
         android:id="@+id/textOptiuneAlege"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:text="Selecteaza"
         android:textColor="@android:color/white"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@id/textOptiune"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintStart_toEndOf="@+id/guideline10"
         app:layout_constraintTop_toTopOf="@id/textOptiune" />
     <View
         android:layout_width="1dp"
@@ -44,6 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.68" />
+        app:layout_constraintGuide_percent="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

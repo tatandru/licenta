@@ -42,28 +42,14 @@ public class AdjectiveFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_general, container, false);
-        adjectiveRomana = view.findViewById(R.id.cuvantRomana);
-        adjectiveEngleza = view.findViewById(R.id.cuvantEngleza);
-        verificare = view.findViewById(R.id.verificarePronuntie);
-        TTS = view.findViewById(R.id.textToSpeechButton);
-        STT = view.findViewById(R.id.speechToTextButton);
-        avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi = view.findViewById(R.id.inapoi);
-
-
-        try {
-            Bundle bundleRo = getArguments().getBundle("bundleAdjectiveRo");
-            Bundle bundleEn = getArguments().getBundle("bundleAdjectiveEn");
-            i = getArguments().getInt("pozitie");
-            adjectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
-            adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        initUI(view);
+        getFromBundle();
+        if (i == 0) {
+            inapoi.setVisibility(View.INVISIBLE);
         }
         return view;
     }
+
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -197,17 +183,42 @@ public class AdjectiveFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 i--;
-                if (i >= 0) {
+                if (i > 0) {
                     verificare.setTextColor(Color.BLACK);
                     verificare.setText("");
                     adjectiveEngleza.setText(adjectiveEnglezaArray.get((int) i));
                     adjectiveRomana.setText(adjectiveRomanaArray.get((int) i));
-                    if (i == 0) {
-                        inapoi.setVisibility(View.INVISIBLE);
-                    }
                 }
+                if (i == 0) {
+                    inapoi.setVisibility(View.INVISIBLE);
+                }
+
             }
         });
 
+    }
+
+    private void initUI(View view) {
+        adjectiveRomana = view.findViewById(R.id.cuvantRomana);
+        adjectiveEngleza = view.findViewById(R.id.cuvantEngleza);
+        verificare = view.findViewById(R.id.verificarePronuntie);
+        TTS = view.findViewById(R.id.textToSpeechButton);
+        STT = view.findViewById(R.id.speechToTextButton);
+        avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi = view.findViewById(R.id.inapoi);
+    }
+
+    private void getFromBundle() {
+        try {
+            Bundle bundleRo = getArguments().getBundle("bundleAdjectiveRo");
+            Bundle bundleEn = getArguments().getBundle("bundleAdjectiveEn");
+            i = getArguments().getInt("pozitie");
+            adjectiveRomanaArray = bundleRo.getStringArrayList("adjectiveRomana");
+            adjectiveEnglezaArray = bundleEn.getStringArrayList("adjectiveEngleza");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

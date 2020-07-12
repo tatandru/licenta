@@ -50,28 +50,16 @@ public class PronumeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_general, container, false);
-        pronumeRomana = view.findViewById(R.id.cuvantRomana);
-        pronumeEngleza = view.findViewById(R.id.cuvantEngleza);
-        verificare = view.findViewById(R.id.verificarePronuntie);
-        TTS = view.findViewById(R.id.textToSpeechButton);
-        STT = view.findViewById(R.id.speechToTextButton);
-        avanseaza = view.findViewById(R.id.avanseaza);
-        inapoi = view.findViewById(R.id.inapoi);
+        initUI(view);
+        getFromBundle();
 
 
-        try {
-            Bundle bundleRo = getArguments().getBundle("bundlePronumeRo");
-            Bundle bundleEn = getArguments().getBundle("bundlePronumeEn");
-            i = getArguments().getInt("pozitie");
-            pronumeRomanaArray = bundleRo.getStringArrayList("pronumeRomana");
-            pronumeEnglezaArray = bundleEn.getStringArrayList("pronumeEngleza");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (i == 0) {
+            inapoi.setVisibility(View.INVISIBLE);
         }
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -221,6 +209,30 @@ public class PronumeFragment extends Fragment {
             }
         });
 
+    }
+
+    private void initUI(View view) {
+        pronumeRomana = view.findViewById(R.id.cuvantRomana);
+        pronumeEngleza = view.findViewById(R.id.cuvantEngleza);
+        verificare = view.findViewById(R.id.verificarePronuntie);
+        TTS = view.findViewById(R.id.textToSpeechButton);
+        STT = view.findViewById(R.id.speechToTextButton);
+        avanseaza = view.findViewById(R.id.avanseaza);
+        inapoi = view.findViewById(R.id.inapoi);
+    }
+
+    private void getFromBundle() {
+        try {
+            Bundle bundleRo = getArguments().getBundle("bundlePronumeRo");
+            Bundle bundleEn = getArguments().getBundle("bundlePronumeEn");
+            i = getArguments().getInt("pozitie");
+            pronumeRomanaArray = bundleRo.getStringArrayList("pronumeRomana");
+            pronumeEnglezaArray = bundleEn.getStringArrayList("pronumeEngleza");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

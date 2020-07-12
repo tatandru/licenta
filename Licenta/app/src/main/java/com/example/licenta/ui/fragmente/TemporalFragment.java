@@ -52,6 +52,9 @@ public class TemporalFragment extends Fragment {
         View view = inflater.inflate(R.layout.lectii_fragment, container, false);
         initUI(view);
         getFromBundle();
+        if(i==0){
+            inapoi.setVisibility(View.INVISIBLE);
+        }
         return view;
     }
 
