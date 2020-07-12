@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     final Bundle bundleZileEn = new Bundle();
     final Bundle bundleZileRo = new Bundle();
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle;
     private NavigationView drawerMenu;
     private NavController navController;
     final Bundle bundleIntrebariLocRo = new Bundle();
